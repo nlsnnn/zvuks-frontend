@@ -1,0 +1,54 @@
+.navLink {
+  transition: 0.2s;
+}
+
+.navLink:hover {
+  color: blue;
+}
+
+.blockClass {
+  display: block;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+  background-color: transparent;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.blockClass:hover {
+  background-color: #f9fafb;
+  color: #4b5563;
+}
+
+.blockClass:active {
+  background-color: #f9fafb;
+  color: #4b5563;
+}
+
+.last:hover {
+  color: #ffffff;
+  background-color: #f87171;
+}
+
+.btn {
+  background-color: red;
+  
+}
+
+.login {
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 2px;
+  width: 80px;
+  transition: .2s;
+}
+
+
+.login:hover{
+  transform: scale(.95);
+  /* opacity: .8; */
+}
