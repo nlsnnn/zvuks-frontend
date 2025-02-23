@@ -19,7 +19,7 @@ export const Header = observer(() => {
   useEffect(() => {
     if (user) {
       setMenuRoutes(routes.user);
-  
+
     }
   }, [user]);
 

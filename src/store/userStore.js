@@ -46,11 +46,11 @@ class UserStore {
   async checkAuth() {
     try {
       const response = await UserService.getMe();
-      console.log(response);
+      // console.log(response);
       this.user = response.data;
-      console.log("auth");
-      console.log(this.user);
-      console.log(this.user.target);
+      // console.log("auth");
+      // console.log(this.user);
+      // console.log(this.user.target);
     } catch (e) {
       this.user = null;
     }
