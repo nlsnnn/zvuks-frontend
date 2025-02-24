@@ -1,27 +1,52 @@
 import { Header } from "../../Header/Header";
 import { Friends } from "../../Friends/Friends";
+import styles from "./FriendsPage.module.css";
+import { useState } from "react";
 
 export const FriendsPage = () => {
+  const [friendsType, setFriendsType] = useState("my");
+  
   return (
     <>
       <Header />
       <main className="container">
-        <div class="flex flex-col  items-center md:items-start">
-          <h2 class="text-3xl font-semibold text-center md:text-left">
-            Друзья
-          </h2>
-          <div class="flex gap-4 mt-6 flex-col items-center sm:flex-row">
-            <input
-              type="text"
-              class="py-1.5 px-4 rounded-lg border border-black text-xs outline-none"
-              placeholder="Имя..."
-            />
-            <button class="py-1 px-8 max-sm:w-1/2 rounded-lg bg-blue-600  text-white font-medium hover:bg-blue-500 transition">
-              Найти
-            </button>
+        <div className={styles.flexColCenter}>
+          <div className={styles.flexRowSpaceBetween}>
+            <div>
+              <h2 className={styles.title}>Друзья</h2>
+              <div
+                className={`${styles.flexGap4} ${styles.flexColCenterSmRow}`}
+              >
+                <input
+                  type="text"
+                  className={styles.inputStyle}
+                  placeholder="Имя..."
+                />
+                <button
+                  className={`${styles.buttonStyle} ${styles.maxSmWidthHalf}`}
+                >
+                  Найти
+                </button>
+              </div>
+            </div>
+
+            <div className="flex gap-2 font-semibold">
+              <span
+                className={`cursor-pointer ${styles.hover}`}
+                onClick={() => setFriendsType("sended")}
+              >
+                Исходящие
+              </span>
+              <span
+                className={`cursor-pointer ${styles.hover}`}
+                onClick={() => setFriendsType("pending")}
+              >
+                Подписчики
+              </span>
+            </div>
           </div>
         </div>
-        <Friends />
+        <Friends type={friendsType} />
       </main>
     </>
   );

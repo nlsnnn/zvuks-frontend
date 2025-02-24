@@ -16,6 +16,24 @@ class FriendStore {
       console.log(e);
     }
   }
+
+  async getPending() {
+    try {
+      const response = await FriendService.getPendings();
+      this.friends = response.data.requests;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getSended() {
+    try {
+      const response = await FriendService.getSended();
+      this.friends = response.data.requests;
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 export const friendStore = new FriendStore();
