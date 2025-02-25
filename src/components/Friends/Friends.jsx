@@ -13,6 +13,7 @@ export const Friends = observer(({ type }) => {
     } else if (type == 'pending') {
       friendStore.getPending();
     }
+    console.log(friendStore.friends);
   }, [type]);
 
   return (
@@ -23,6 +24,7 @@ export const Friends = observer(({ type }) => {
           username={friend.username}
           picturePath="test"
           key={friend.id}
+          id={friend.id}
         />
       ))}
       {!friendStore.friends.length && (

@@ -34,6 +34,28 @@ class FriendStore {
       console.log(e);
     }
   }
+
+  async acceptRequest(id) {
+    try {
+      const data = {
+        "user_sended_id": id
+      }
+      const response = await FriendService.acceptRequest(data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async rejectRequest(id) {
+    try {
+      const data = {
+        "user_sended_id": id
+      }
+      const response = await FriendService.rejectRequest(data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 export const friendStore = new FriendStore();

@@ -7,3 +7,6 @@ export const me = "/auth/me/"
 
 export const pending = "/friends/pending"
 export const sended = "/friends/sended"
+export const accept = "/friends/accept"
+export const reject = "/friends/reject"
+export const deleteFriend = "/friends/delete"
