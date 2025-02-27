@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { FriendService } from "../service/friendService";
+import { UserService } from "../service/userService";
 
 class FriendStore {
   friends = [];
@@ -35,6 +36,15 @@ class FriendStore {
     }
   }
 
+  async searchUsers(query) {
+    try {
+      const response = await UserService.searchUsers(query);
+      this.friends = response.data.users;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   async acceptRequest(id) {
     try {
       const data = {
@@ -56,6 +66,7 @@ class FriendStore {
       console.log(e);
     }
   }
+
 }
 
 export const friendStore = new FriendStore();

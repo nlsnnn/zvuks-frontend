@@ -13,9 +13,12 @@ export const FriendCard = ({ type, username, picturePath, id }) => {
       setDownBtn('Удалить')
     } else if (type == 'sended') {
       setTopBtn('Отменить')
-    } else {
+    } else if (type == 'pending') {
       setTopBtn('Принять')
       setDownBtn('Отклонить')
+    } else if (type == 'global') {
+      setTopBtn('Добавить')
+      setDownBtn(null)
     }
   }, [type])
 

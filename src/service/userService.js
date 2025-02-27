@@ -1,5 +1,5 @@
 import { apiClient } from "../api/apiClient";
-import { login, register, me, logout } from "../config/constants";
+import { login, register, me, logout, search } from "../config/constants";
 
 export class UserService {
     
@@ -52,6 +52,16 @@ export class UserService {
         } catch (e) {
             console.log(e);
             return false
+        }
+    }
+
+    static async searchUsers(query) {
+        try {
+            const response = await apiClient.get(search + `?query=${query}`);
+            console.log(response);
+            return response
+        } catch (e) {
+            console.log(e);
         }
     }
 }

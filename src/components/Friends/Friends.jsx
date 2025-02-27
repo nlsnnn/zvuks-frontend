@@ -4,16 +4,22 @@ import { FriendCard } from "./FriendCard/FriendCard";
 import { observer } from "mobx-react-lite";
 
 export const Friends = observer(({ type }) => {
+  const [noList, setNoList] = useState('');
 
   useEffect(() => {
     if (type == 'my') {
       friendStore.getFriends();
+      setNoList('У вас нет друзей!');
     } else if (type == 'sended') {
       friendStore.getSended();
+      setNoList('У вас нет исходящих заявок в друзья!');
     } else if (type == 'pending') {
       friendStore.getPending();
+      setNoList('У вас нет запросов в друзья!');
+    } else if (type == 'global') {
+      friendStore.friends = [];
+      setNoList('Введите имя пользователя')
     }
-    console.log(friendStore.friends);
   }, [type]);
 
   return (
@@ -28,7 +34,7 @@ export const Friends = observer(({ type }) => {
         />
       ))}
       {!friendStore.friends.length && (
-        <h2 className="text-4xl font-bold">У вас нет друзей!</h2>
+        <h2 className="text-4xl font-bold">{noList}</h2>
       )}
     </div>
   );

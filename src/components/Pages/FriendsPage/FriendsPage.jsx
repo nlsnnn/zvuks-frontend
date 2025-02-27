@@ -2,9 +2,17 @@ import { Header } from "../../Header/Header";
 import { Friends } from "../../Friends/Friends";
 import styles from "./FriendsPage.module.css";
 import { useState } from "react";
+import { friendStore } from "../../../store/friendStore";
 
 export const FriendsPage = () => {
   const [friendsType, setFriendsType] = useState("my");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = async () => {
+    if (friendsType === "global") {
+      await friendStore.searchUsers(searchQuery)
+    }
+  }
   
   return (
     <>
@@ -21,9 +29,12 @@ export const FriendsPage = () => {
                   type="text"
                   className={styles.inputStyle}
                   placeholder="Имя..."
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  value={searchQuery}
                 />
                 <button
                   className={`${styles.buttonStyle} ${styles.maxSmWidthHalf}`}
+                  onClick={handleSearch}
                 >
                   Найти
                 </button>
@@ -31,6 +42,18 @@ export const FriendsPage = () => {
             </div>
 
             <div className="flex gap-2 font-semibold">
+              <span
+                className={`cursor-pointer ${styles.hover}`}
+                onClick={() => setFriendsType("global")}
+              >
+                Глобальный поиск
+              </span>
+              <span
+                className={`cursor-pointer ${styles.hover}`}
+                onClick={() => setFriendsType("my")}
+              >
+                Мои друзья
+              </span>
               <span
                 className={`cursor-pointer ${styles.hover}`}
                 onClick={() => setFriendsType("sended")}
@@ -46,7 +69,7 @@ export const FriendsPage = () => {
             </div>
           </div>
         </div>
-        <Friends type={friendsType} />
+        <Friends type={friendsType}  />
       </main>
     </>
   );
