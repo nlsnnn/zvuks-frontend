@@ -9,9 +9,11 @@ export const FriendsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = async () => {
-    if (friendsType === "global") {
-      await friendStore.searchUsers(searchQuery)
+    if (!searchQuery.trim()) {
+      return
     }
+    setFriendsType("global")
+    await friendStore.searchUsers(searchQuery)
   }
   
   return (
@@ -43,25 +45,25 @@ export const FriendsPage = () => {
 
             <div className="flex gap-2 font-semibold">
               <span
-                className={`cursor-pointer ${styles.hover}`}
+                className={`cursor-pointer ${styles.hover} ${friendsType == "global" ? styles.activeType : ""}`}
                 onClick={() => setFriendsType("global")}
               >
                 Глобальный поиск
               </span>
               <span
-                className={`cursor-pointer ${styles.hover}`}
+                className={`cursor-pointer ${styles.hover} ${friendsType == "my" ? styles.activeType : ""}`}
                 onClick={() => setFriendsType("my")}
               >
                 Мои друзья
               </span>
               <span
-                className={`cursor-pointer ${styles.hover}`}
+                className={`cursor-pointer ${styles.hover} ${friendsType == "sended" ? styles.activeType : ""}`}
                 onClick={() => setFriendsType("sended")}
               >
                 Исходящие
               </span>
               <span
-                className={`cursor-pointer ${styles.hover}`}
+                className={`cursor-pointer ${styles.hover} ${friendsType == "pending" ? styles.activeType : ""}`}
                 onClick={() => setFriendsType("pending")}
               >
                 Подписчики

@@ -76,9 +76,30 @@
   }
 
   .hover {
-    transition: .3s;
+    transition: ease .3s all;
   }
 
   .hover:hover {
     color: rgb(65, 65, 65);
+  }
+
+  .activeType {
+    position: relative;
+  }
+  
+  .activeType::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* Смещаем вниз */
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    transform: scaleX(1);
+    transition: transform 0.2s ease;
+  }
+  
+  /* Убираем черточку при отсутствии класса .activeType */
+  span:not(.activeType)::after {
+    transform: scaleX(0);
   }

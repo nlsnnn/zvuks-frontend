@@ -17,10 +17,15 @@ export const Friends = observer(({ type }) => {
       friendStore.getPending();
       setNoList('У вас нет запросов в друзья!');
     } else if (type == 'global') {
-      friendStore.friends = [];
-      setNoList('Введите имя пользователя')
+      setNoList('Введите имя пользователя');
     }
   }, [type]);
+
+  useEffect(() => {
+    if (type == "global" && friendStore.friends && friendStore.friends.length === 0) {
+      setNoList("Ничего не найдено")
+    }
+  }, [friendStore.friends, type])
 
   return (
     <div className="flex flex-wrap justify-center md:justify-normal gap-12 mt-6">
