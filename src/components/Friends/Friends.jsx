@@ -17,6 +17,7 @@ export const Friends = observer(({ type }) => {
       friendStore.getPending();
       setNoList('У вас нет запросов в друзья!');
     } else if (type == 'global') {
+      friendStore.friends = [];
       setNoList('Введите имя пользователя');
     }
   }, [type]);
@@ -36,6 +37,7 @@ export const Friends = observer(({ type }) => {
           picturePath="test"
           key={friend.id}
           id={friend.id}
+          status={friend.status}
         />
       ))}
       {!friendStore.friends.length && (

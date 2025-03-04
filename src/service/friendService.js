@@ -44,7 +44,7 @@ export class FriendService {
 
   static async rejectRequest(data) {
     try {
-      const response = await apiClient.post(reject)
+      const response = await apiClient.post(reject, data)
       return response
     } catch (e) {
       console.log(e);
