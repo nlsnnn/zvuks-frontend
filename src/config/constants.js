@@ -8,6 +8,7 @@ export const me = "/auth/me/"
 export const search = "/auth/user/search/" 
 
 // Friends
+export const friends = "/friends"
 export const pending = "/friends/pending"
 export const sended = "/friends/sended"
 export const accept = "/friends/accept"

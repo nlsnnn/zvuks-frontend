@@ -8,11 +8,11 @@ export const headerRoutes = [
     icon: faMusic,
   },
   {
-    href: "friends/",
+    href: "/friends",
     icon: faUserGroup,
   },
   {
-    href: "chats/",
+    href: "/chats",
     icon: faComment,
   },
 ];
@@ -21,68 +21,60 @@ export const routes = {
   user: [
     {
       title: "Профиль",
-      href: "profile",
+      href: "/profile",
       class: s.blockClass,
     },
     {
       title: "Музыка",
-      href: "music",
+      href: "/music",
       class: s.blockClass,
     },
     {
       title: "Друзья",
-      href: "friends",
+      href: "/friends",
       class: s.blockClass,
     },
     {
       title: "Чаты",
-      href: "chats",
+      href: "/chats",
       class: s.blockClass,
     },
     {
       title: "Выйти",
-      href: "logout",
+      href: "/logout",
       class: s.blockClass + " " + s.last,
     },
   ],
   
-  
-  // [
-  //   {
-  //     title: 'Войти',
-  //     href: 'login',
-  //     class: s.btn
-  //   }
-  // ],
   admin: [
     {
       title: "Профиль",
-      href: "profile",
+      href: "/profile",
       class: s.blockClass,
     },
     {
       title: "Админ-панель",
-      href: "admin",
+      href: "/admin",
       class: s.blockClass,
     },
     {
       title: "Музыка",
-      href: "music",
+      href: "/music",
       class: s.blockClass,
     },
     {
       title: "Друзья",
-      href: "friends",
+      href: "/friends",
       class: s.blockClass,
     },
     {
       title: "Чаты",
-      href: "chats",
+      href: "/chats",
       class: s.blockClass,
     },
     {
       title: "Выйти",
-      href: "logout",
+      href: "/logout",
       class: s.blockClass + " " + s.last,
     },
   ],

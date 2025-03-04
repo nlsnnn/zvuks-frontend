@@ -45,6 +45,18 @@ class FriendStore {
     }
   }
 
+  async sendRequest(id) {
+    try {
+      const data = {
+        "user_received_id": id
+      }
+      const response = await FriendService.sendRequest(data)
+      return response
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   async acceptRequest(id) {
     try {
       const data = {
