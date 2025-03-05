@@ -20,6 +20,17 @@
   margin: 0 auto;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+.hover-blue {
+  transition: .2s;
+}
+.hover-blue:hover {
+  color: #4f46e5;
+}
+
 .swiper-wrapper {
   width: 100%;
   height: max-content !important;

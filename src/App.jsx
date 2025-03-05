@@ -17,6 +17,7 @@ function App() {
         <Route path='/logout' element={<Logout />} />
         <Route path='/friends' element={<FriendsPage />} />
         <Route path='/chats' element={<ChatsPage />} />
+        <Route path='/chats/:userId' element={<ChatsPage />} />
       </Routes>
     </BrowserRouter>
   )
