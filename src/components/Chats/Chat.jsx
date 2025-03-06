@@ -35,7 +35,7 @@ export const Chat = observer(({ userId }) => {
         </div>
         <div className="flex flex-col flex-grow h-screen  bg-gray-50 shadow-xl rounded-lg overflow-hidden">
           <div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
-            {chatStore.messages.map((message) => (
+            {chatStore.messages && chatStore.messages.map((message) => (
               <Message
                 content={message.content}
                 time={message.created_at}
@@ -43,6 +43,7 @@ export const Chat = observer(({ userId }) => {
                 key={message.id}
               />
             ))}
+            {!chatStore.messages.length && <h2 className="text-center text-4xl pt-52">Начните общение!</h2>}
           </div>
           <div className="bg-gray-300 p-4 flex ">
             <input
