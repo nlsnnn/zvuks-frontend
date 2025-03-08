@@ -4,23 +4,46 @@ import { Message } from "./Message";
 import { observer } from "mobx-react-lite";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { websocketURL } from "../../config/constants";
 
 export const Chat = observer(({ userId }) => {
-  const [messageContent, setMessageContent] = useState('');
+  const [messageContent, setMessageContent] = useState("");
+  const [websocket, setWebsocket] = useState(null);
 
   useEffect(() => {
     if (userId) {
       chatStore.getMessages(userId);
+
+      const ws = new WebSocket(websocketURL + userId);
+
+      ws.onopen = () => {
+        console.log("Websocket start!");
+      };
+
+      ws.onmessage = (event) => {
+        const msg = JSON.parse(event.data);
+
+        chatStore.messages = [...chatStore.messages, msg];
+      };
+
+      ws.onclose = () => {
+        console.log("Websocket end!");
+      };
+
+      setWebsocket(ws);
+
+      return () => {
+        ws.close();
+      }
     }
   }, [userId]);
 
   const handleClick = async () => {
     if (messageContent.trim().length) {
-        await chatStore.sendMessage(userId, messageContent)
-        await chatStore.getMessages(userId)
-        setMessageContent('');
+      await chatStore.sendMessage(userId, messageContent);
+      setMessageContent("");
     }
-  }
+  };
 
   return (
     <>
@@ -35,15 +58,18 @@ export const Chat = observer(({ userId }) => {
         </div>
         <div className="flex flex-col flex-grow h-screen  bg-gray-50 shadow-xl rounded-lg overflow-hidden">
           <div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
-            {chatStore.messages && chatStore.messages.map((message) => (
-              <Message
-                content={message.content}
-                time={message.created_at}
-                sender={message.sender_id}
-                key={message.id}
-              />
-            ))}
-            {!chatStore.messages.length && <h2 className="text-center text-4xl pt-52">Начните общение!</h2>}
+            {chatStore.messages &&
+              chatStore.messages.map((message) => (
+                <Message
+                  content={message.content}
+                  time={message.created_at}
+                  sender={message.sender_id}
+                  key={message.id}
+                />
+              ))}
+            {!chatStore.messages.length && (
+              <h2 className="text-center text-4xl pt-52">Начните общение!</h2>
+            )}
           </div>
           <div className="bg-gray-300 p-4 flex ">
             <input
@@ -53,7 +79,11 @@ export const Chat = observer(({ userId }) => {
               value={messageContent}
               onChange={(e) => setMessageContent(e.target.value)}
             />
-            <FontAwesomeIcon icon={faArrowRight} className="text-3xl hover-blue pointer" onClick={handleClick} />
+            <FontAwesomeIcon
+              icon={faArrowRight}
+              className="text-3xl hover-blue pointer"
+              onClick={handleClick}
+            />
           </div>
         </div>
       </div>
