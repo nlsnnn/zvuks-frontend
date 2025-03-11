@@ -17,3 +17,7 @@ export const deleteFriend = "/friends/delete"
 
 // Chat
 export const messages = "/chat/messages/"
+
+
+// Song
+export const songs = "/music/song/"
