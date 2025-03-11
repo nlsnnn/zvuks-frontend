@@ -18,3 +18,7 @@ export const deleteFriend = "/friends/delete"
 // Chat
 export const messages = "/chat/messages/"
 export const websocketURL = "ws://127.0.0.1:8000/chat/ws/"
+
+
+// Song
+export const songs = "/music/song/"

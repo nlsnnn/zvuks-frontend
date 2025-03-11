@@ -3,10 +3,12 @@ import { Friends } from "../../Friends/Friends";
 import styles from "./FriendsPage.module.css";
 import { useState } from "react";
 import { friendStore } from "../../../store/friendStore";
+import { useAuthCheck } from "../../../hooks/useAuthCheck";
 
 export const FriendsPage = () => {
   const [friendsType, setFriendsType] = useState("my");
   const [searchQuery, setSearchQuery] = useState("");
+  useAuthCheck();
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) {

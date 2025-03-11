@@ -2,9 +2,11 @@ import { useParams } from "react-router-dom";
 import { Header } from "../../Header/Header";
 import { Chat } from "../../Chats/Chat";
 import { Contacts } from "../../Contacts/Contacts";
+import { useAuthCheck } from "../../../hooks/useAuthCheck";
 
 export const ChatsPage = () => {
-  const { userId } = useParams(); 
+  const { userId } = useParams();
+  useAuthCheck();
 
   return (
     <>
