@@ -16,7 +16,7 @@ export const Songs = observer(() => {
           {songStore.songs.map((song) => (
             <Song
               name={song.name}
-              author={song.user_id}
+              author={song.author}
               coverLink={song.cover_path}
               songLink={song.path}
               key={song.id}

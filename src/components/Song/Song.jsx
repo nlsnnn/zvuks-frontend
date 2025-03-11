@@ -1,7 +1,35 @@
-export const Song = ({name, author, coverLink, songLink}) => {
+import { useEffect, useState } from "react";
+import { Howl } from "howler";
+
+export const Song = ({ name, author, coverLink, songLink }) => {
+  const [howl, setHowl] = useState(null);
+
+  useEffect(() => {
+    const newHowl = new Howl({
+      src: songLink,
+      loop: true,
+      autoplay: false,
+      volume: 0.25
+    });
+
+    setHowl(newHowl);
+  }, []);
+
+  const togglePlay = () => {
+    if (howl.playing()) {
+      howl.pause();
+      return;
+    }
+
+    howl.play();
+  };
+
   return (
     <>
-      <div className="flex justify-between items-center bg-gray-200 hover:bg-gray-300 transition rounded-lg w-60 cursor-pointer">
+      <div
+        onClick={togglePlay}
+        className="flex justify-between items-center bg-gray-200 hover:bg-gray-300 transition rounded-lg w-60 cursor-pointer"
+      >
         <img src={coverLink} className="w-16 h-16 rounded-l-lg" alt="obloga" />
         <div className="flex flex-col gap-1">
           <p className="font-medium text-xs">{author}</p>
@@ -16,7 +44,6 @@ export const Song = ({name, author, coverLink, songLink}) => {
           </a>
         </div>
       </div>
-      <audio src={songLink} controls></audio>
     </>
   );
 };
