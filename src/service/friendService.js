@@ -1,5 +1,5 @@
 import { apiClient } from "../api/apiClient";
-import { accept, friends, pending, reject, sended } from "../config/constants";
+import { accept, deleteFriend, friends, pending, reject, sended } from "../config/constants";
 
 export class FriendService {
   static async getFriends() {
@@ -55,6 +55,16 @@ export class FriendService {
   static async sendRequest(data) {
     try {
       const response = await apiClient.post(friends, data);
+      return response;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  }
+
+  static async deleteFriend(data) {
+    try {
+      const response = await apiClient.post(deleteFriend, data)
       return response;
     } catch (e) {
       console.log(e);

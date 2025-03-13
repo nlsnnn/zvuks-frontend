@@ -79,6 +79,17 @@ class FriendStore {
     }
   }
 
+  async deleteFriend(id) {
+    try {
+      const data = {
+        "user_id": id
+      }
+      const response = await FriendService.deleteFriend(data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
 }
 
 export const friendStore = new FriendStore();

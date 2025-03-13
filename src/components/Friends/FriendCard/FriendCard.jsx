@@ -10,7 +10,6 @@ export const FriendCard = ({ type, username, picturePath, id, status }) => {
 
   useEffect(() => {
     if (userStore.user && id === userStore.user.id) {
-      console.log('kek');
       setTopBtn(null);
       setDownBtn(null);
     } else if (type === 'global') {
@@ -24,6 +23,7 @@ export const FriendCard = ({ type, username, picturePath, id, status }) => {
           setDownBtn(null);
           break;
         case 'none':
+        case 'deleted':
           setTopBtn('Добавить');
           setDownBtn(null);
           break;
@@ -60,6 +60,17 @@ export const FriendCard = ({ type, username, picturePath, id, status }) => {
     }
   }
 
+  const handleDownBtn = async (userId) => {
+    if (type == 'my') {
+      await friendStore.deleteFriend(userId);
+      await friendStore.getFriends();
+
+    } else if (type == 'pending') {
+      await friendStore.rejectRequest(userId)
+      await friendStore.getPending()
+    }
+  }
+
   return (
     <div className={styles.container} id={id}>
       <img src={picturePath} className={styles.image} alt="Friend Image" />
@@ -74,7 +85,7 @@ export const FriendCard = ({ type, username, picturePath, id, status }) => {
           {topBtn}
         </span>
       )}
-      {downBtn && <button className={styles.delete}>{downBtn}</button>}
+      {downBtn && <button className={styles.delete} onClick={() => handleDownBtn(id)}>{downBtn}</button>}
     </div>
   );
 };
