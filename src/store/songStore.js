@@ -18,6 +18,22 @@ class SongStore {
     }
   }
 
+  async addSong(name, date, cover, song) {
+    try {
+      const form = new FormData()
+      form.append("name", name)
+      form.append("release_date", date)
+      form.append("song", song)
+      form.append("cover", cover)
+
+      const response = await SongService.addSong(form)
+      return response
+    } catch (e) {
+      console.log(e);
+      return false
+    }
+  }
+
 }
 
 export const songStore = new SongStore();

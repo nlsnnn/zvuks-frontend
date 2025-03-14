@@ -12,4 +12,14 @@ export class SongService {
     }
   }
 
+  static async addSong(data) {
+    try {
+      const response = await apiClient.post(songs, data)
+      return response
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  }
+
 }

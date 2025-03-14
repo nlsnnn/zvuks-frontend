@@ -7,6 +7,7 @@ import { Logout } from './components/Pages/Logout'
 import { FriendsPage } from './components/Pages/FriendsPage/FriendsPage'
 import { ChatsPage } from './components/Pages/ChatsPage/ChatsPage'
 import { ErrorPage } from './components/Pages/ErrorPage/ErrorPage'
+import { AddSongPage } from './components/Pages/AddSongPage'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/friends' element={<FriendsPage />} />
         <Route path='/chats' element={<ChatsPage />} />
         <Route path='/chats/:userId' element={<ChatsPage />} />
+        <Route path='/add-song' element={<AddSongPage />} />
       </Routes>
     </BrowserRouter>
   )
