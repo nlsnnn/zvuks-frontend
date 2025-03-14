@@ -54,7 +54,7 @@ export const Chat = observer(({ userId }) => {
             alt="carson"
             className="rounded-full w-12 h-12"
           />
-          <span>username</span>
+          <span>{chatStore.username}</span>
         </div>
         <div className="flex flex-col flex-grow h-screen  bg-gray-50 shadow-xl rounded-lg overflow-hidden">
           <div className="flex flex-col flex-grow h-0 p-4 overflow-auto">

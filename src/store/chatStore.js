@@ -3,6 +3,7 @@ import { ChatService } from "../service/chatService";
 
 class ChatStore {
   messages = [];
+  username = "none";
 
   constructor() {
     makeAutoObservable(this);
@@ -11,7 +12,8 @@ class ChatStore {
   async getMessages(userId) {
     try {
       const response = await ChatService.getMessages(userId);
-      this.messages = response.data;
+      this.messages = response.data.messages;
+      this.username = response.data.username;
     } catch (e) {
       console.log(e);
     }
