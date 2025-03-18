@@ -3,6 +3,7 @@ import { SongService } from "../service/songService";
 
 class SongStore {
   songs = [];
+  song = null;
 
   constructor() {
     makeAutoObservable(this);
