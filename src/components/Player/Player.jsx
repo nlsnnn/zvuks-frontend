@@ -5,48 +5,20 @@ import {
   faStop,
   faForward,
 } from "@fortawesome/free-solid-svg-icons";
-import { Howler } from "howler";
 import { songStore } from "../../store/songStore";
-import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 
-export const Player = observer(({ playing, setPlaying, selectedHowl }) => {
-  const [name, setName] = useState("no");
-  const [cover, setCover] = useState("/hamster.jpg");
-
-  useEffect(() => {
-    if (songStore.song) {
-      setName(songStore.song.name);
-      setCover(songStore.song.cover_path);
-    }
-  }, [songStore.song]);
-
-  const handleVolumeChange = (e) => {
-    Howler.volume(parseInt(e.target.value, 10) / 100);
-  };
-
-  const togglePlay = () => {
-    if (!selectedHowl) return;
-
-    if (playing) {
-      selectedHowl.pause();
-      setPlaying(false);
-    } else {
-      selectedHowl.play();
-      setPlaying(true);
-    }
-  };
-
+export const Player = observer(() => {
   return (
     <>
       <div className="flex flex-col w-80 border border-black rounded-lg p-2">
         <img
-          src={cover}
+          src={songStore.currentSong?.cover_path || "/hamster.jpg"}
           className="rounded-t-lg h-36 object-cover"
           alt="Обложка"
         />
         <div className="flex flex-col gap-2 items-center">
-          <h4>{name}</h4>
+          <h4>{songStore.currentSong?.name || "Нет трека"}</h4>
           <span id="ProgressLabel" className="sr-only">
             Loading
           </span>
@@ -54,7 +26,7 @@ export const Player = observer(({ playing, setPlaying, selectedHowl }) => {
             type="range"
             max={100}
             defaultValue={100}
-            onChange={handleVolumeChange}
+            onChange={(e) => songStore.setVolume(e.target.value)}
             className="cursor-pointer"
           />
 
@@ -62,15 +34,17 @@ export const Player = observer(({ playing, setPlaying, selectedHowl }) => {
             <FontAwesomeIcon
               icon={faBackward}
               className="cursor-pointer hover:text-blue-800 transition"
+              onClick={() => songStore.playPrevious()}
             />
             <FontAwesomeIcon
               className="cursor-pointer hover:text-blue-800"
-              onClick={togglePlay}
-              icon={playing ? faStop : faPlay}
+              icon={songStore.isPlaying ? faStop : faPlay}
+              onClick={() => songStore.togglePlay()}
             />
             <FontAwesomeIcon
               icon={faForward}
-              className="cursor-pointer hover:text-blue-800 "
+              className="cursor-pointer hover:text-blue-800"
+              onClick={() => songStore.playNext()}
             />
           </div>
         </div>
