@@ -9,6 +9,7 @@ class SongStore {
   volume = 1;
   currentTime = 0;
   duration = 0;
+  isPlaying = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -16,10 +17,6 @@ class SongStore {
 
   get currentSong() {
     return this.songs[this.currentSongIndex];
-  }
-
-  get isPlaying() {
-    return this.currentHowl?.playing() || false;
   }
 
   setVolume(value) {
@@ -65,6 +62,15 @@ class SongStore {
       autoplay: true,
       volume: this.volume,
       onend: () => this.playNext(),
+      onplay: () => {
+        this.isPlaying = true;
+      },
+      onpause: () => {
+        this.isPlaying = false;
+      },
+      onstop: () => {
+        this.isPlaying = false;
+      },
       onload: () => {
         this.duration = this.currentHowl.duration();
       },
@@ -89,6 +95,7 @@ class SongStore {
 
   togglePlay() {
     if (this.currentHowl) {
+      this.isPlaying = !this.isPlaying;
       this.currentHowl.playing()
         ? this.currentHowl.pause()
         : this.currentHowl.play();
