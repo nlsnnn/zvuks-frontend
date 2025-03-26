@@ -8,7 +8,7 @@ export const AddAlbum = () => {
   const [releaseDate, setReleaseDate] = useState("");
   const [coverImage, setCoverImage] = useState(null);
   const [coverImageFile, setCoverImageFile] = useState(null);
-  const [songs, setSongs] = useState([{ name: "", feats: "", file: null }]);
+  const [songs, setSongs] = useState([{ name: "", feats: "", file: null, trackNumber: 1 }]);
   const navigate = useNavigate();
 
   const handleCoverImageChange = (e) => {
@@ -28,7 +28,7 @@ export const AddAlbum = () => {
 
   const handleAddSong = () => {
     if (songs.length < 50) {
-      setSongs([...songs, { name: "", feats: "", file: null }]);
+      setSongs([...songs, { name: "", feats: "", file: null, trackNumber: songs.length+1 }]);
     }
   };
 
@@ -40,21 +40,26 @@ export const AddAlbum = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await albumStore.addAlbum(albumName, releaseDate, coverImageFile, songs)
+    const res = await albumStore.addAlbum(
+      albumName,
+      releaseDate,
+      coverImageFile,
+      songs
+    );
     if (res) {
-        navigate('/')
+      navigate("/");
     }
   };
 
   return (
     <>
-    <Header />
+      <Header />
       <main className="main-container mt-8">
         <h2 className="text-2xl font-bold text-center md:text-left">
           Добавить альбом
         </h2>
 
-        <div className="flex gap-12 md:gap-48 items-center md:items-center flex-col md:flex-row mt-12">
+        <div className="flex gap-12 md:gap-48 items-center md:items-start flex-col md:flex-row mt-12">
           <div className="flex flex-col gap-8">
             <input
               type="file"
@@ -71,7 +76,7 @@ export const AddAlbum = () => {
             />
 
             {songs.map((song, index) => (
-              <div key={index} className="flex flex-col gap-2">
+              <div key={index} className="flex flex-col">
                 <input
                   type="file"
                   id={`songFileInput-${index}`}
@@ -82,14 +87,14 @@ export const AddAlbum = () => {
                 <img
                   src="/"
                   alt="Загрузите песню"
-                  className="rounded-lg border border-black w-80 h-32 object-cover hover:opacity-80 cursor-pointer"
+                  className="rounded-t-lg border border-black w-80 h-32 object-cover hover:opacity-80 cursor-pointer"
                   onClick={() =>
                     document.getElementById(`songFileInput-${index}`).click()
                   }
                 />
                 <button
                   type="button"
-                  className="text-red-500 text-sm"
+                  className="p-2 rounded-b-lg text-red-500 text-sm font-semibold bg-gray-100 hover:bg-gray-200 transition cursor-pointer"
                   onClick={() => handleRemoveSong(index)}
                 >
                   Удалить трек
@@ -145,9 +150,7 @@ export const AddAlbum = () => {
                     onChange={(e) =>
                       setSongs(
                         songs.map((s, i) =>
-                          i === index
-                            ? { ...s, name: e.target.validationMessage }
-                            : s
+                          i === index ? { ...s, name: e.target.value } : s
                         )
                       )
                     }
@@ -161,6 +164,23 @@ export const AddAlbum = () => {
                       setSongs(
                         songs.map((s, i) =>
                           i === index ? { ...s, feats: e.target.value } : s
+                        )
+                      )
+                    }
+                  />
+                  <input
+                    type="number"
+                    className="p-0.5 border border-blue-400 rounded outline-none"
+                    placeholder="Номер трека"
+                    value={song.trackNumber}
+                    min={1}
+                    max={50}
+                    onChange={(e) =>
+                      setSongs(
+                        songs.map((s, i) =>
+                          i === index
+                            ? { ...s, trackNumber: e.target.value }
+                            : s
                         )
                       )
                     }

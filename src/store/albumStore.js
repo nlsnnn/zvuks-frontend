@@ -22,11 +22,19 @@ class AlbumStore {
       formData.append("name", name);
       formData.append("release_date", date);
       formData.append("cover", cover);
+      const songFiles = []
+      const songNames = []
+      const songNumbers = []
 
+      songs.forEach((song) => {
+        songFiles.push(song.file)
+        songNames.push(song.name)
+        songNumbers.push(+song.trackNumber)
+      });
       songs.forEach((song, index) => {
-        formData.append(`songs[${index}].name`, song.name);
-        formData.append(`songs[${index}].feats`, song.feats);
-        formData.append(`songs[${index}].file`, song.file);
+        formData.append(`songs`, song.file);
+        formData.append(`song_names`, song.name);
+        formData.append(`track_numbers`, song.trackNumber.toString());
       });
 
       const response = await AlbumService.addAlbum(formData);
