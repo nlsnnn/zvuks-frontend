@@ -23,7 +23,7 @@ export const Song = observer(({ song, index }) => {
         alt="Обложка"
       />
       <div className="flex flex-col gap-1">
-        <p className="font-medium text-xs">{song.author}</p>
+        <p className="font-medium text-xs">{song.authors}</p>
         <span className="font-bold text-lg">{song.name}</span>
       </div>
       <div className="flex flex-col gap-2 text-xs p-2">

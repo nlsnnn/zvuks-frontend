@@ -2,15 +2,16 @@ import { useState } from "react";
 import { Header } from "../../Header/Header";
 import { songStore } from "../../../store/songStore";
 import { useNavigate } from "react-router-dom";
+import { Artists } from "./Artists";
 
 export const AddSong = () => {
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
-  const [feats, setFeats] = useState("");
+  const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [coverImage, setCoverImage] = useState(null);
   const [coverImageFile, setCoverImageFile] = useState(null);
   const [songFile, setSongFile] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleCoverImageChange = (event) => {
     const file = event.target.files[0];
@@ -30,9 +31,17 @@ export const AddSong = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const res = await songStore.addSong(name, date, coverImageFile, songFile);
+    const artistIds = selectedAuthors.map((author) => author.id).join(",");
+
+    const res = await songStore.addSong(
+      name,
+      date,
+      artistIds,
+      coverImageFile,
+      songFile
+    );
     if (res) {
-        navigate('/')
+      navigate("/");
     }
   };
 
@@ -94,15 +103,10 @@ export const AddSong = () => {
                 onChange={(e) => setDate(e.target.value)}
               />
             </div>
-            <div className="flex flex-col gap-2">
-              <label className="font-medium">Гости</label>
-              <input
-                type="text"
-                className="p-1 border border-black rounded-lg outline-none"
-                value={feats}
-                onChange={(e) => setFeats(e.target.value)}
-              />
-            </div>
+            <Artists
+              selectedAuthors={selectedAuthors}
+              setSelectedAuthors={setSelectedAuthors}
+            />
 
             <button
               type="submit"

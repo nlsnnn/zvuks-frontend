@@ -55,6 +55,15 @@ class UserStore {
       this.user = null;
     }
   }
+
+  async getUsers(query) {
+    try {
+      const response = await UserService.searchUsers(query);
+      return response.data.users;
+    } catch (e) {
+      throw e;
+    }
+  }
 }
 
 export const userStore = new UserStore();

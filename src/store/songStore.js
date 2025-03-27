@@ -112,11 +112,12 @@ class SongStore {
     }
   }
 
-  async addSong(name, date, cover, song) {
+  async addSong(name, date, artists, cover, song) {
     try {
       const form = new FormData();
       form.append("name", name);
       form.append("release_date", date);
+      form.append("artist_ids", artists);
       form.append("song", song);
       form.append("cover", cover);
 
