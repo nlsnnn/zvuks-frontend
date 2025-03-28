@@ -2,6 +2,7 @@ import { Header } from "../Header/Header";
 import { Player } from "../Player/Player";
 import { Songs } from "../Songs/Songs";
 import { Link } from "react-router-dom";
+import { AlbumCards } from "../Albums/components/AlbumCards";
 
 export const MainPage = () => {
   return (
@@ -12,6 +13,7 @@ export const MainPage = () => {
         <Player />
         <Link to='/add-song' className="text-red-500 hover:text-red-800 transition">Добавить песню</Link>
         <Link to='/add-album' className="text-blue-500 hover:text-blue-800 transition">Добавить альбом </Link>
+        <AlbumCards />
         <Songs />
       </main>
     </>

@@ -9,6 +9,7 @@ import { ChatsPage } from './components/Pages/ChatsPage/ChatsPage'
 import { ErrorPage } from './components/Pages/ErrorPage/ErrorPage'
 import { AddSongPage } from './components/Pages/AddSongPage'
 import { AddAlbumPage } from './components/Pages/AddAlbumPage'
+import { AlbumPage } from './components/Pages/AlbumPage'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='/chats/:userId' element={<ChatsPage />} />
         <Route path='/add-song' element={<AddSongPage />} />
         <Route path='/add-album' element={<AddAlbumPage />} />
+        <Route path='/album/:albumId' element={<AlbumPage />} />
       </Routes>
     </BrowserRouter>
   )

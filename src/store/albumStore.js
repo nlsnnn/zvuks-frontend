@@ -2,15 +2,39 @@ import { makeAutoObservable } from "mobx";
 import { AlbumService } from "../service/albumService";
 
 class AlbumStore {
+  album = null;
+  albums = [];
+  albumSongs = [];
+
   constructor() {
     makeAutoObservable(this);
+  }
+
+  async getAlbum(albumId) {
+    try {
+      const response = await AlbumService.getAlbum(albumId);
+      console.log(response.data);
+      this.album = response.data.album;
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async getAlbums() {
     try {
       const response = await AlbumService.getAlbums();
       console.log(response);
-      this.songs = response.data.songs;
+      this.albums = response.data.albums
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getAlbumSongs(albumId) {
+    try {
+      const response = await AlbumService.getAlbumSongs(albumId);
+      this.albumSongs = response.data.songs
+      
     } catch (e) {
       console.log(e);
     }

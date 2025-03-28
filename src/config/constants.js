@@ -24,3 +24,5 @@ export const websocketURL = "ws://127.0.0.1:8000/chat/ws/"
 export const songs = "/music/song/"
 
 export const albums = "/music/album"
+export const album = (albumId) => `/music/album/${albumId}`
+export const albumSongs = (albumId) => `/music/album/${albumId}/songs`
