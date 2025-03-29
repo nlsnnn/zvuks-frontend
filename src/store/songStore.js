@@ -42,9 +42,11 @@ class SongStore {
   playSong(index) {
     if (index < 0 || index >= this.songs.length) return;
 
-    if (index === this.currentSongIndex) {
-      // TODO вынести отсюда
+    if (index === this.currentSongIndex && this.isPlaying) {
       this.currentHowl.pause();
+      return;
+    } else if (index === this.currentSongIndex && !(this.isPlaying)) {
+      this.currentHowl.play();
       return;
     }
 
@@ -100,6 +102,11 @@ class SongStore {
         ? this.currentHowl.pause()
         : this.currentHowl.play();
     }
+  }
+
+  loadAlbumSongs(songs) {
+    this.songs = songs;
+    this.currentSongIndex = -1;
   }
 
   async getSongs() {
