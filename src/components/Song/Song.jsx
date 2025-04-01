@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { songStore } from "../../store/songStore";
+import { FavoriteSongIcons } from "../Favorite/components/FavoriteSongIcons";
 
 export const Song = observer(({ song, index }) => {
   const isActive = songStore.currentSongIndex === index;
@@ -26,10 +27,7 @@ export const Song = observer(({ song, index }) => {
         <p className="font-medium text-xs">{song.authors}</p>
         <span className="font-bold text-lg">{song.name}</span>
       </div>
-      <div className="flex flex-col gap-2 text-xs p-2">
-        <i className="fa-solid fa-heart hover:text-red-400 transition cursor-pointer" />
-        <i className="fa-solid fa-share hover:text-blue-300 transition cursor-pointer" />
-      </div>
+      <FavoriteSongIcons song={song} />
     </div>
   );
 });

@@ -26,3 +26,7 @@ export const songs = "/music/song/"
 export const albums = "/music/album"
 export const album = (albumId) => `/music/album/${albumId}`
 export const albumSongs = (albumId) => `/music/album/${albumId}/songs`
+
+// Favorite
+export const favoriteSong = "/music/favorite/song" 
+export const favoriteAlbum = "/music/favorite/album" 

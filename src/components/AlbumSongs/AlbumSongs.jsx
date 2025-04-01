@@ -7,7 +7,7 @@ import { songStore } from "../../store/songStore";
 export const AlbumSongs = observer(({ albumId }) => {
   useEffect(() => {
     albumStore.getAlbumSongs(albumId).then(() => {
-      songStore.loadAlbumSongs(albumStore.albumSongs);
+      songStore.loadOtherSongs(albumStore.albumSongs);
     });
   }, []);
 

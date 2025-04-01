@@ -104,7 +104,7 @@ class SongStore {
     }
   }
 
-  loadAlbumSongs(songs) {
+  loadOtherSongs(songs) {
     this.songs = songs;
     this.currentSongIndex = -1;
   }
