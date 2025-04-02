@@ -11,8 +11,13 @@ export const MainPage = () => {
       <main className="container">
         <h1>Главная страница</h1>
         <Player />
-        <Link to='/add-song' className="text-red-500 hover:text-red-800 transition">Добавить песню</Link>
-        <Link to='/add-album' className="text-blue-500 hover:text-blue-800 transition">Добавить альбом </Link>
+        <div className="flex gap-2">
+          <Link to='/add-song' className="text-red-500 hover:text-red-800 transition">Добавить песню</Link>
+          <Link to='/add-album' className="text-blue-500 hover:text-blue-800 transition">Добавить альбом </Link>
+        </div>
+        <div className="flex gap-2">
+          <Link to='/favorite/songs' className="text-green-800 hover:text-green-500 transition">Моя музыка</Link>
+        </div>
         <AlbumCards />
         <Songs />
       </main>

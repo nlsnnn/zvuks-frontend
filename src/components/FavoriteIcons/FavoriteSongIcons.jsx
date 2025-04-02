@@ -1,4 +1,4 @@
-import { userStore } from "../../../store/userStore";
+import { userStore } from "../../store/userStore";
 import { FavoriteSongIcon } from "./FavoriteSongIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare } from "@fortawesome/free-solid-svg-icons";

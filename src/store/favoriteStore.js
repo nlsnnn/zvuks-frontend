@@ -11,6 +11,7 @@ class FavoriteStore {
 
   async getSongs() {
     const response = await FavoriteService.getSongs();
+    console.log(response);
     this.songs = response.data;
   }
 

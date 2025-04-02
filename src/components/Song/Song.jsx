@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { songStore } from "../../store/songStore";
-import { FavoriteSongIcons } from "../Favorite/components/FavoriteSongIcons";
+import { FavoriteSongIcons } from "../FavoriteIcons/FavoriteSongIcons";
 
 export const Song = observer(({ song, index }) => {
   const isActive = songStore.currentSongIndex === index;

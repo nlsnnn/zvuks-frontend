@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { favoriteStore } from "../../../store/favoriteStore";
+import { favoriteStore } from "../../store/favoriteStore";
 
 export const FavoriteSongIcon = ({ id, isFavorite }) => {
   const handleClick = async () => {

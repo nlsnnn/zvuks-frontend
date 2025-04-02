@@ -38,7 +38,7 @@ export const AddAlbum = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
 
     const res = await albumStore.addAlbum(
       albumName,
