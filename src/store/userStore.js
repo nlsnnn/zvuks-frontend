@@ -3,6 +3,7 @@ import { UserService } from "../service/userService";
 
 class UserStore {
   user = null;
+  userProfile = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -46,11 +47,7 @@ class UserStore {
   async checkAuth() {
     try {
       const response = await UserService.getMe();
-      // console.log(response);
       this.user = response.data;
-      // console.log("auth");
-      // console.log(this.user);
-      // console.log(this.user.target);
     } catch (e) {
       this.user = null;
     }
@@ -62,6 +59,16 @@ class UserStore {
       return response.data.users;
     } catch (e) {
       throw e;
+    }
+  }
+
+  async getProfile(userId) {
+    try {
+      const response = await UserService.getProfile(userId);
+      this.userProfile = response.data;
+      return response.data;
+    } catch (e) {
+      console.log(e);
     }
   }
 }

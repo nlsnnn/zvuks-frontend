@@ -12,6 +12,7 @@ import { AddAlbumPage } from './components/Pages/AddAlbumPage'
 import { AlbumPage } from './components/Pages/AlbumPage'
 import { FavoriteSongsPage } from './components/Pages/FavoriteSongsPage'
 import { FavoriteAlbumsPage } from './components/Pages/FavoriteAlbumsPage'
+import { ProfilePage } from './components/Pages/ProfilePage'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path='/album/:albumId' element={<AlbumPage />} />
         <Route path='/favorite/songs' element={<FavoriteSongsPage />} />
         <Route path='/favorite/albums' element={<FavoriteAlbumsPage />} />
+        <Route path='/user/:userId' element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>
   )

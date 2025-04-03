@@ -1,11 +1,11 @@
 import { apiClient } from "../api/apiClient";
-import { login, register, me, logout, search } from "../config/constants";
+import { login, register, me, logout, search, profile } from "../config/constants";
 
 export class UserService {
     
     static async login(data) {
         try {
-            const response = await apiClient.post(login, data) // , { withCredentials: true }
+            const response = await apiClient.post(login, data)
             return response.data;
         } catch (e) {
             if (e.response && e.response.data.detail) {
@@ -59,6 +59,15 @@ export class UserService {
         try {
             const response = await apiClient.get(search + `?query=${query}`);
             console.log(response);
+            return response
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    static async getProfile(userId) {
+        try {
+            const response = await apiClient.get(profile(userId));
             return response
         } catch (e) {
             console.log(e);
