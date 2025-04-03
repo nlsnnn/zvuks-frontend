@@ -19,15 +19,13 @@ export const FavoriteSongs = observer(() => {
           <Link to="/favorite/albums">Мои альбомы</Link>
         </div>
         <div className="mt-4 flex flex-col gap-2 ">
-          {favoriteStore.songs.map((song, index) => (
-            <AlbumSong
-              cover={song.cover_path}
-              name={song.name}
-              artists={song.authors}
-              index={index}
-              isFavorite={song.is_favorite}
-            />
-          ))}
+          {favoriteStore.songs.length > 0 &&
+            favoriteStore.songs.map((song, index) => (
+              <AlbumSong key={song.id} song={song} index={index} />
+            ))}
+          {favoriteStore.songs.length == 0 && (
+            <h2>У вас нет избранных песен!</h2>
+          )}
         </div>
       </main>
     </>

@@ -14,13 +14,11 @@ export const AlbumSongs = observer(({ albumId }) => {
   return (
     <>
       <div className="flex flex-col gap-2 ">
-        {albumStore.albumSongs.map((album, index) => (
+        {albumStore.albumSongs.map((song, index) => (
           <AlbumSong
-            key={album.id}
+            key={song.id}
             index={index}
-            cover={album.cover_path}
-            name={album.name}
-            artists={album.authors}
+            song={song}
           />
         ))}
       </div>

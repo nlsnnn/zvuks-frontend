@@ -33,6 +33,21 @@ class FavoriteStore {
     };
     await FavoriteService.addAlbum(data);
   }
+
+  async removeSong(songId) {
+    const data = {
+      song_id: songId
+    };
+    console.log(data);
+    await FavoriteService.removeSong(data);
+  }
+
+  async removeAlbum(albumId) {
+    const data = {
+      album_id: albumId
+    };
+    await FavoriteService.removeAlbum(data);
+  }
 }
 
 export const favoriteStore = new FavoriteStore();

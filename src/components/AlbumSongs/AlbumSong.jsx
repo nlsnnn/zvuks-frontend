@@ -2,8 +2,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
 import { songStore } from "../../store/songStore";
 import { useState } from "react";
+import { favoriteStore } from "../../store/favoriteStore";
 
-export const AlbumSong = ({ cover, name, artists, index, isFavorite }) => {
+export const AlbumSong = ({ song, index }) => {
   const [isCoverHover, setIsCoverHover] = useState(false);
   const [faIcon, setFaIcon] = useState(faPlay);
 
@@ -20,6 +21,14 @@ export const AlbumSong = ({ cover, name, artists, index, isFavorite }) => {
     handleIcon();
   };
 
+  const removeFavorite = async () => {
+    if (song.is_favorite) {
+      await favoriteStore.removeSong(song.id);
+      await favoriteStore.getSongs()  
+    }
+    return
+  };
+
   return (
     <>
       <div
@@ -31,8 +40,8 @@ export const AlbumSong = ({ cover, name, artists, index, isFavorite }) => {
         <div className="flex gap-2">
           <div className="relative">
             <img
-              src={cover}
-              alt={name}
+              src={song.cover_path}
+              alt={song.name}
               className="w-16 h-16 rounded object-cover"
             />
             <div
@@ -53,16 +62,22 @@ export const AlbumSong = ({ cover, name, artists, index, isFavorite }) => {
             </div>
           </div>
           <div className="flex flex-col gap-1 pt-2">
-            <span>{name}</span>
+            <span>{song.name}</span>
             <span className="text-gray-500 hover:text-blue-600 cursor-pointer w-max">
-              {artists}
+              {song.authors}
             </span>
           </div>
         </div>
         <div className="flex gap-2 justify-center items-center">
           <FontAwesomeIcon
             icon={faHeart}
-            className={"transition cursor-pointer " + (isFavorite ? "text-red-500 hover:text-gray-600" : "hover:text-red-500")}
+            onClick={removeFavorite}
+            className={
+              "transition cursor-pointer " +
+              (song.is_favorite
+                ? "text-red-500 hover:text-gray-600"
+                : "hover:text-red-500")
+            }
           />
           <span className="w-max h-max">1:53</span>
         </div>
