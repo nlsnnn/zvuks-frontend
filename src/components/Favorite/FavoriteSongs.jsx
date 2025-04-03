@@ -21,7 +21,7 @@ export const FavoriteSongs = observer(() => {
         <div className="mt-4 flex flex-col gap-2 ">
           {favoriteStore.songs.length > 0 &&
             favoriteStore.songs.map((song, index) => (
-              <AlbumSong key={song.id} song={song} index={index} />
+              <AlbumSong key={index} song={song} index={index} />
             ))}
           {favoriteStore.songs.length == 0 && (
             <h2>У вас нет избранных песен!</h2>

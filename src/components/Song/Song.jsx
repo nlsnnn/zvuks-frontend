@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { songStore } from "../../store/songStore";
 import { FavoriteSongIcons } from "../FavoriteIcons/FavoriteSongIcons";
+import { Link } from "react-router-dom";
 
 export const Song = observer(({ song, index }) => {
   const isActive = songStore.currentSongIndex === index;
@@ -24,7 +25,13 @@ export const Song = observer(({ song, index }) => {
         alt="Обложка"
       />
       <div className="flex flex-col gap-1">
-        <p className="font-medium text-xs">{song.authors}</p>
+        <div className="flex gap-2 font-medium text-xs">
+          {song.artists.map((artist) => (
+            <p className="text-gray-500 hover:text-blue-600 cursor-pointer w-max">
+              <Link to={`/user/${artist.id}`}>{artist.username}</Link>
+            </p>
+          ))}
+        </div>
         <span className="font-bold text-lg">{song.name}</span>
       </div>
       <FavoriteSongIcons song={song} />

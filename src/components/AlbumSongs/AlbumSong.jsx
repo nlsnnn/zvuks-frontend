@@ -3,6 +3,7 @@ import { faHeart, faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
 import { songStore } from "../../store/songStore";
 import { useState } from "react";
 import { favoriteStore } from "../../store/favoriteStore";
+import { Link } from "react-router-dom";
 
 export const AlbumSong = ({ song, index }) => {
   const [isCoverHover, setIsCoverHover] = useState(false);
@@ -24,9 +25,9 @@ export const AlbumSong = ({ song, index }) => {
   const removeFavorite = async () => {
     if (song.is_favorite) {
       await favoriteStore.removeSong(song.id);
-      await favoriteStore.getSongs()  
+      await favoriteStore.getSongs();
     }
-    return
+    return;
   };
 
   return (
@@ -63,9 +64,13 @@ export const AlbumSong = ({ song, index }) => {
           </div>
           <div className="flex flex-col gap-1 pt-2">
             <span>{song.name}</span>
-            <span className="text-gray-500 hover:text-blue-600 cursor-pointer w-max">
-              {song.authors}
-            </span>
+            <div className="flex gap-2">
+              {song.artists.map((artist) => (
+                <span className="text-gray-500 hover:text-blue-600 cursor-pointer w-max">
+                  <Link to={`/user/${artist.id}`}>{artist.username}</Link>
+                </span>
+              ))}
+            </div>
           </div>
         </div>
         <div className="flex gap-2 justify-center items-center">
