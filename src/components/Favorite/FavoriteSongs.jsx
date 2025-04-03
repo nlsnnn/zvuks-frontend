@@ -25,6 +25,7 @@ export const FavoriteSongs = observer(() => {
               name={song.name}
               artists={song.authors}
               index={index}
+              isFavorite={song.is_favorite}
             />
           ))}
         </div>

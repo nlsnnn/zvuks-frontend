@@ -3,7 +3,7 @@ import { faHeart, faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
 import { songStore } from "../../store/songStore";
 import { useState } from "react";
 
-export const AlbumSong = ({ cover, name, artists, index }) => {
+export const AlbumSong = ({ cover, name, artists, index, isFavorite }) => {
   const [isCoverHover, setIsCoverHover] = useState(false);
   const [faIcon, setFaIcon] = useState(faPlay);
 
@@ -62,7 +62,7 @@ export const AlbumSong = ({ cover, name, artists, index }) => {
         <div className="flex gap-2 justify-center items-center">
           <FontAwesomeIcon
             icon={faHeart}
-            className="hover:text-red-500 transition cursor-pointer"
+            className={"transition cursor-pointer " + (isFavorite ? "text-red-500 hover:text-gray-600" : "hover:text-red-500")}
           />
           <span className="w-max h-max">1:53</span>
         </div>
