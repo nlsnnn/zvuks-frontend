@@ -50,11 +50,11 @@ export const Chat = observer(({ userId }) => {
       <div className="p-2 flex flex-col  rounded border border-black w-full">
         <div className="px-2 py-2 flex items-center gap-3 border-b border-black cursor-pointer">
           <img
-            src="/hamster.jpg"
-            alt="carson"
+            src={chatStore.user.avatar}
+            alt={chatStore.user.username}
             className="rounded-full w-12 h-12"
           />
-          <span>{chatStore.username}</span>
+          <span>{chatStore.user.username}</span>
         </div>
         <div className="flex flex-col flex-grow h-screen  bg-gray-50 shadow-xl rounded-lg overflow-hidden">
           <div className="flex flex-col flex-grow h-0 p-4 overflow-auto">

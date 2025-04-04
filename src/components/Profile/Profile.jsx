@@ -20,12 +20,24 @@ export const Profile = observer(({ id }) => {
           <>
             <div className="flex gap-6">
               <img
-                src="/hamster.jpg"
+                src={userStore.userProfile.avatar}
                 alt={userStore.userProfile.username}
-                className="w-90 h-80 rounded-4xl"
+                className="w-80 h-80 rounded-4xl"
               />
-              <div className="flex flex-col">
-                <h2 className="text-4xl font-semibold">{userStore.userProfile.username}</h2>
+              <div className="flex h-max items-center gap-8">
+                <div className="flex flex-col">
+                  <h2 className="text-4xl font-semibold">
+                    {userStore.userProfile.username}
+                  </h2>
+                </div>
+
+                {userStore.userProfile.id === userStore.user.id && (
+                  <>
+                    <div>
+                      <span>Изменить</span>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </>

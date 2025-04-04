@@ -43,7 +43,7 @@ export const Header = observer(() => {
               >
                 <img
                   className="rounded-full h-10 w-10"
-                  src={hamster}
+                  src={userStore.user.avatar}
                   alt="avatar"
                 />
               </button>

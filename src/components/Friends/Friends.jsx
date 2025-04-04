@@ -34,7 +34,7 @@ export const Friends = observer(({ type }) => {
         <FriendCard
           type={type}
           username={friend.username}
-          picturePath="test"
+          picturePath={friend.avatar}
           key={friend.id}
           id={friend.id}
           status={friend.status}

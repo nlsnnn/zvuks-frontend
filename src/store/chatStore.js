@@ -3,7 +3,7 @@ import { ChatService } from "../service/chatService";
 
 class ChatStore {
   messages = [];
-  username = "none";
+  user = null
 
   constructor() {
     makeAutoObservable(this);
@@ -13,7 +13,7 @@ class ChatStore {
     try {
       const response = await ChatService.getMessages(userId);
       this.messages = response.data.messages;
-      this.username = response.data.username;
+      this.user = response.data.user;
     } catch (e) {
       console.log(e);
     }
