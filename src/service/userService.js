@@ -1,5 +1,5 @@
 import { apiClient } from "../api/apiClient";
-import { login, register, me, logout, search, profile } from "../config/constants";
+import { login, register, me, logout, search, profile, updateProfile } from "../config/constants";
 
 export class UserService {
     
@@ -73,4 +73,13 @@ export class UserService {
             console.log(e);
         }
     }
+
+    static async updateProfile(data) {
+        try {
+            const response = await apiClient.post(updateProfile, data)
+            return response
+        } catch (e) {
+            console.log(e);
+        }
+    } 
 }

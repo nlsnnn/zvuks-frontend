@@ -14,6 +14,7 @@ import { FavoriteSongsPage } from './components/Pages/FavoriteSongsPage'
 import { FavoriteAlbumsPage } from './components/Pages/FavoriteAlbumsPage'
 import { ProfilePage } from './components/Pages/ProfilePage'
 import { ProfileRedirect } from './components/Profile/ProfileRedirect'
+import { ProfileUpdatePage } from './components/Pages/ProfileUpdatePage'
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path='/favorite/albums' element={<FavoriteAlbumsPage />} />
         <Route path='/user/:userId' element={<ProfilePage />} />
         <Route path='/profile' element={<ProfileRedirect />} />
+        <Route path='/profile/update' element={<ProfileUpdatePage />} />
       </Routes>
     </BrowserRouter>
   )

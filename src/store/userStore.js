@@ -71,6 +71,17 @@ class UserStore {
       console.log(e);
     }
   }
+
+  async updateProfile(avatar) {
+    try {
+      const formData = new FormData()
+      formData.append("avatar", avatar)
+      const response = await UserService.updateProfile(formData)
+      return response
+    } catch (e) {
+      return false
+    }
+  }
 }
 
 export const userStore = new UserStore();

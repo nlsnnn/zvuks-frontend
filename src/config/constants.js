@@ -7,6 +7,7 @@ export const logout = "/auth/logout/";
 export const me = "/auth/me/";
 export const search = "/auth/user/search/";
 export const profile = (userId) => `/auth/user/profile/${userId}`;
+export const updateProfile = "auth/user/update"
 
 // Friends
 export const friends = "/friends";

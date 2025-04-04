@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { userStore } from "../../store/userStore";
 import { Header } from "../Header/Header";
 import { observer } from "mobx-react-lite";
+import { Link } from "react-router-dom";
 
 export const Profile = observer(({ id }) => {
   useEffect(() => {
@@ -34,7 +35,7 @@ export const Profile = observer(({ id }) => {
                 {userStore.userProfile.id === userStore.user.id && (
                   <>
                     <div>
-                      <span>Изменить</span>
+                      <Link to="/profile/update">Изменить</Link>
                     </div>
                   </>
                 )}
