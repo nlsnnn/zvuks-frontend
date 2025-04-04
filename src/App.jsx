@@ -13,6 +13,7 @@ import { AlbumPage } from './components/Pages/AlbumPage'
 import { FavoriteSongsPage } from './components/Pages/FavoriteSongsPage'
 import { FavoriteAlbumsPage } from './components/Pages/FavoriteAlbumsPage'
 import { ProfilePage } from './components/Pages/ProfilePage'
+import { ProfileRedirect } from './components/Profile/ProfileRedirect'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path='/favorite/songs' element={<FavoriteSongsPage />} />
         <Route path='/favorite/albums' element={<FavoriteAlbumsPage />} />
         <Route path='/user/:userId' element={<ProfilePage />} />
+        <Route path='/profile' element={<ProfileRedirect />} />
       </Routes>
     </BrowserRouter>
   )
