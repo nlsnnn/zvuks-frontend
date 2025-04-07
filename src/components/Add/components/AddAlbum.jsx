@@ -2,13 +2,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { albumStore } from "../../../store/albumStore";
 import { Header } from "../../Header/Header";
+import { Artists } from "./Artists";
 
 export const AddAlbum = () => {
   const [albumName, setAlbumName] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
+  const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [coverImage, setCoverImage] = useState(null);
   const [coverImageFile, setCoverImageFile] = useState(null);
-  const [songs, setSongs] = useState([{ name: "", feats: "", file: null, trackNumber: 1 }]);
+  const [songs, setSongs] = useState([
+    { name: "", feats: "", file: null, trackNumber: 1 },
+  ]);
   const navigate = useNavigate();
 
   const handleCoverImageChange = (e) => {
@@ -28,7 +32,10 @@ export const AddAlbum = () => {
 
   const handleAddSong = () => {
     if (songs.length < 50) {
-      setSongs([...songs, { name: "", feats: "", file: null, trackNumber: songs.length+1 }]);
+      setSongs([
+        ...songs,
+        { name: "", feats: "", file: null, trackNumber: songs.length + 1 },
+      ]);
     }
   };
 
@@ -38,7 +45,9 @@ export const AddAlbum = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
+
+    const artistIds = selectedAuthors.map((author) => author.id).join(",");
 
     const res = await albumStore.addAlbum(
       albumName,
@@ -155,7 +164,11 @@ export const AddAlbum = () => {
                       )
                     }
                   />
-                  <input
+                  <Artists
+                    selectedAuthors={selectedAuthors}
+                    setSelectedAuthors={setSelectedAuthors}
+                  />
+                  {/* <input
                     type="text"
                     className="p-0.5 border border-blue-400 rounded outline-none"
                     placeholder="Гости"
@@ -167,7 +180,7 @@ export const AddAlbum = () => {
                         )
                       )
                     }
-                  />
+                  /> */}
                   <input
                     type="number"
                     className="p-0.5 border border-blue-400 rounded outline-none"

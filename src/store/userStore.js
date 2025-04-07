@@ -10,10 +10,10 @@ class UserStore {
     this.checkAuth();
   }
 
-  async login(email, password) {
+  async login(identifier, password) {
     try {
       const response = await UserService.login({
-        email: email,
+        identifier: identifier,
         password: password,
       });
       this.user = response;
