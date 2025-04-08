@@ -1,6 +1,6 @@
 import { faComment } from "@fortawesome/free-regular-svg-icons";
 import { faUserGroup, faMusic } from "@fortawesome/free-solid-svg-icons";
-import s from "../components/Header/Header.module.css";
+import s from "../old_components/Header/Header.module.css";
 
 export const headerRoutes = [
   {
