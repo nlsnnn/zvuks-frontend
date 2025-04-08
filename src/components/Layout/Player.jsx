@@ -18,7 +18,7 @@ export const Player = () => {
 
       {/* Центр */}
       <div className="flex flex-col items-center flex-1">
-        <div className="flex items-center gap-4 mb-1">
+        <div className="flex items-center gap-4 mb-2.5">
           <button className="text-gray-700 hover:text-blue-600 cursor-pointer">
             <FaBackward />
           </button>
@@ -38,7 +38,7 @@ export const Player = () => {
       {/* Правая часть */}
       <div className="hidden sm:flex items-center gap-4 w-full sm:w-auto justify-end">
         <button className="text-gray-500 hover:text-red-500 cursor-pointer">
-            <FaHeart />
+          <FaHeart />
         </button>
         <input
           type="range"
