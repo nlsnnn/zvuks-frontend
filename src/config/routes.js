@@ -1,81 +1,24 @@
-import { faComment } from "@fortawesome/free-regular-svg-icons";
-import { faUserGroup, faMusic } from "@fortawesome/free-solid-svg-icons";
-import s from "../old_components/Header/Header.module.css";
+import { FaUser, FaUserGroup, FaComment, FaMusic } from "react-icons/fa6";
 
-export const headerRoutes = [
+export const sidebarRoutes = [
   {
     href: "/",
-    icon: faMusic,
+    icon: FaMusic,
+    title: "Главная",
+  },
+  {
+    href: "/profile",
+    icon: FaUser,
+    title: "Профиль",
   },
   {
     href: "/friends",
-    icon: faUserGroup,
+    icon: FaUserGroup,
+    title: "Друзья",
   },
   {
     href: "/chats",
-    icon: faComment,
+    icon: FaComment,
+    title: "Чаты",
   },
 ];
-
-export const routes = {
-  user: [
-    {
-      title: "Профиль",
-      href: "/profile",
-      class: s.blockClass,
-    },
-    {
-      title: "Музыка",
-      href: "/music",
-      class: s.blockClass,
-    },
-    {
-      title: "Друзья",
-      href: "/friends",
-      class: s.blockClass,
-    },
-    {
-      title: "Чаты",
-      href: "/chats",
-      class: s.blockClass,
-    },
-    {
-      title: "Выйти",
-      href: "/logout",
-      class: s.blockClass + " " + s.last,
-    },
-  ],
-  
-  admin: [
-    {
-      title: "Профиль",
-      href: "/profile",
-      class: s.blockClass,
-    },
-    {
-      title: "Админ-панель",
-      href: "/admin",
-      class: s.blockClass,
-    },
-    {
-      title: "Музыка",
-      href: "/music",
-      class: s.blockClass,
-    },
-    {
-      title: "Друзья",
-      href: "/friends",
-      class: s.blockClass,
-    },
-    {
-      title: "Чаты",
-      href: "/chats",
-      class: s.blockClass,
-    },
-    {
-      title: "Выйти",
-      href: "/logout",
-      class: s.blockClass + " " + s.last,
-    },
-  ],
-};
