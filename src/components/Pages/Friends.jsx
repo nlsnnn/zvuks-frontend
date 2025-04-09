@@ -1,54 +1,57 @@
 import { useState } from "react";
-import { FriendCard } from "../UI/FriendCard";
+import { observer } from "mobx-react-lite";
+import { friendStore } from "../../store/friendStore";
+import { FriendsList } from "../Features/Friends/FriendsList";
+import { SentRequestsList } from "../Features/Friends/SentRequestsList";
+import { ReceivedRequestsList } from "../Features/Friends/ReceivedRequestsList";
+import { SearchResultsList } from "../Features/Friends/SearchResultsList";
 
-const allFriendsMock = [
-  { id: 1, name: "Алексей", avatar: "/hamster.jpg" },
-  { id: 2, name: "Мария", avatar: "/hamster.jpg" },
-  { id: 3, name: "Иван", avatar: "/hamster.jpg" },
-  { id: 4, name: "Ольга", avatar: "/hamster.jpg" },
-];
+export const Friends = observer(() => {
+  const [activeTab, setActiveTab] = useState("friends");
+  const [searchQuery, setSearchQuery] = useState("");
 
-export const Friends = () => {
-  const [search, setSearch] = useState("");
-  const [sentRequests, setSentRequests] = useState([]);
-  const [receivedRequests, setReceivedRequests] = useState([]);
-  const [friends, setFriends] = useState(allFriendsMock);
-
-  const handleSendRequest = (id) => {
-    setSentRequests((prev) => [...prev, id]);
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    if (query.length > 0) friendStore.searchUsers(query);
+    else friendStore.searchResults = [];
   };
-
-  const handleRemoveFriend = (id) => {
-    setFriends((prev) => prev.filter((f) => f.id !== id));
-  };
-
-  const filteredFriends = friends.filter((friend) =>
-    friend.name.toLowerCase().includes(search.toLowerCase())
-  );
 
   return (
-    <div>
+    <div className="p-4 max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold mb-6 text-gray-900">Друзья</h1>
-
-      <input
-        type="text"
-        placeholder="Поиск по имени"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="mb-6 px-4 py-2 w-full max-w-md rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-      />
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredFriends.map((friend) => (
-          <FriendCard
-            key={friend.id}
-            friend={friend}
-            isSent={sentRequests.includes(friend.id)}
-            onSendRequest={handleSendRequest}
-            onRemove={handleRemoveFriend}
+      <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
+        <div className="flex flex-wrap gap-2">
+          {["friends", "sent", "received", "search"].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-4 py-2 rounded-md font-medium transition-colors ${
+                activeTab === tab
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              }`}
+            >
+              {tab === "friends" && "Мои друзья"}
+              {tab === "sent" && "Отправленные"}
+              {tab === "received" && "Полученные"}
+              {tab === "search" && "Поиск"}
+            </button>
+          ))}
+        </div>
+        {activeTab === "search" && (
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => handleSearch(e.target.value)}
+            placeholder="Поиск пользователей"
+            className="p-2 border border-gray-300 rounded-md w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-        ))}
+        )}
       </div>
+      {activeTab === "friends" && <FriendsList />}
+      {activeTab === "sent" && <SentRequestsList />}
+      {activeTab === "received" && <ReceivedRequestsList />}
+      {activeTab === "search" && <SearchResultsList searchQuery={searchQuery} />}
     </div>
   );
-};
+});
