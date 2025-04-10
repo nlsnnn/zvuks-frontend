@@ -28,7 +28,7 @@ export const Header = () => {
             <span>{userStore.user.username}</span>
             <button
               onClick={handleLogout}
-              className="text-red-500 hover:text-red-700 transition-colors duration-200"
+              className="text-red-500 hover:text-red-700 transition-colors duration-200 hover:underline cursor-pointer"
             >
               Выйти
             </button>
@@ -39,7 +39,6 @@ export const Header = () => {
             Войти
           </Link>
         )}
-
       </div>
 
       {menuOpen && (
