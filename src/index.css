@@ -9,3 +9,15 @@ body {
     font-size: 15px;
   }
 }
+
+@layer components {
+  .form-error {
+    @apply text-red-500 text-sm pl-2 pt-1.5
+  }
+
+  .form-label {
+    @apply block text-base pl-2 pb-1 font-medium text-gray-700
+  }
+
+
+}
