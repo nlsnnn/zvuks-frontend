@@ -17,11 +17,11 @@ export const Friends = observer(() => {
   };
 
   return (
-    <div className="p-4 max-w-4xl mx-auto">
+    <div className="p-4  mx-auto">
       <h1 className="text-2xl font-bold mb-6 text-gray-900">Друзья</h1>
       <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
         <div className="flex flex-wrap gap-2">
-          {["friends", "sent", "received", "search"].map((tab) => (
+          {["friends", "sent", "received"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -34,24 +34,23 @@ export const Friends = observer(() => {
               {tab === "friends" && "Мои друзья"}
               {tab === "sent" && "Отправленные"}
               {tab === "received" && "Полученные"}
-              {tab === "search" && "Поиск"}
             </button>
           ))}
         </div>
-        {activeTab === "search" && (
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => handleSearch(e.target.value)}
-            placeholder="Поиск пользователей"
-            className="p-2 border border-gray-300 rounded-md w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        )}
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => handleSearch(e.target.value)}
+          placeholder="Поиск пользователей"
+          className="p-2 border border-gray-300 rounded-md w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
       </div>
       {activeTab === "friends" && <FriendsList />}
       {activeTab === "sent" && <SentRequestsList />}
       {activeTab === "received" && <ReceivedRequestsList />}
-      {activeTab === "search" && <SearchResultsList searchQuery={searchQuery} />}
+      {activeTab === "search" && (
+        <SearchResultsList searchQuery={searchQuery} />
+      )}
     </div>
   );
 });

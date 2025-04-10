@@ -1,9 +1,23 @@
+import { useEffect } from "react";
 import { FriendCard } from "../../UI/FriendCard";
+import { friendStore } from "../../../store/friendStore";
+import { observer } from "mobx-react-lite";
 
-export const SentRequestsList = () => {
-  const sentRequests = [
-    { id: 3, name: "Сергей Сергеев", avatar: "https://via.placeholder.com/40" },
-  ];
+export const SentRequestsList = observer(() => {
+  useEffect(() => {
+    friendStore.getSended();
+  }, []);
+
+  if (friendStore.loading)
+    return <div className="text-center">Загрузка...</div>;
+  if (friendStore.error)
+    return <div className="text-red-500 text-center">{friendStore.error}</div>;
+  if (!friendStore.sended.length)
+    return (
+      <div className="text-center text-gray-500">
+        У вас нет отправленных запросов
+      </div>
+    );
 
   const handleCancelRequest = (id) => {
     console.log(`Отменить запрос для id ${id}`);
@@ -11,19 +25,21 @@ export const SentRequestsList = () => {
 
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-2 text-gray-800">
-        Отправленные запросы
-      </h2>
       <div className="space-y-2">
-        {sentRequests.map((request) => (
+        {friendStore.sended.map((request) => (
           <FriendCard
             key={request.id}
             friend={request}
-            isSent={true}
-            onRemove={handleCancelRequest}
+            actions={[
+              {
+                label: "Отменить запрос",
+                color: "red",
+                onClick: () => handleCancelRequest(request.id),
+              },
+            ]}
           />
         ))}
       </div>
     </div>
   );
-};
+});

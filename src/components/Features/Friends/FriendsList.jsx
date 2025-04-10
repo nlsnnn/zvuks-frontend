@@ -8,9 +8,12 @@ export const FriendsList = observer(() => {
     friendStore.getFriends();
   }, []);
 
-  if (friendStore.loading) return <div className="text-center">Загрузка...</div>;
-  if (friendStore.error) return <div className="text-red-500 text-center">{friendStore.error}</div>;
-  if (!friendStore.friends.length) return <div className="text-center text-gray-500">У вас нет друзей</div>;
+  if (friendStore.loading)
+    return <div className="text-center">Загрузка...</div>;
+  if (friendStore.error)
+    return <div className="text-red-500 text-center">{friendStore.error}</div>;
+  if (!friendStore.friends.length)
+    return <div className="text-center text-gray-500">У вас нет друзей</div>;
 
   return (
     <div className="space-y-2">
@@ -19,8 +22,16 @@ export const FriendsList = observer(() => {
           key={friend.id}
           friend={friend}
           actions={[
-            { label: "Написать", color: "blue", onClick: () => console.log(`Сообщение ${friend.id}`) },
-            { label: "Удалить", color: "red", onClick: () => friendStore.deleteFriend(friend.id) },
+            {
+              label: "Написать",
+              color: "blue",
+              onClick: () => console.log(`Сообщение ${friend.id}`),
+            },
+            {
+              label: "Удалить",
+              color: "red",
+              onClick: () => friendStore.deleteFriend(friend.id),
+            },
           ]}
         />
       ))}
