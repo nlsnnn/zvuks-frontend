@@ -12,8 +12,12 @@ export const Friends = observer(() => {
 
   const handleSearch = (query) => {
     setSearchQuery(query);
-    if (query.length > 0) friendStore.searchUsers(query);
-    else friendStore.searchResults = [];
+    if (query.length > 0) {
+      friendStore.searchUsers(query);
+      setActiveTab("search");
+    } else {
+      friendStore.searchResults = [];
+    }
   };
 
   return (

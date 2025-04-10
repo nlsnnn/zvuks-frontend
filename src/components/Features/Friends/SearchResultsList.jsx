@@ -1,8 +1,11 @@
 import { observer } from "mobx-react-lite";
 import { friendStore } from "../../../store/friendStore";
 import { FriendCard } from "../../UI/FriendCard";
+import { useNavigate } from "react-router-dom";
 
 export const SearchResultsList = observer(({ searchQuery }) => {
+  const navigate = useNavigate();
+
   if (!searchQuery) return null;
   if (friendStore.loading) return <div className="text-center">Поиск...</div>;
   if (friendStore.error)
@@ -18,9 +21,20 @@ export const SearchResultsList = observer(({ searchQuery }) => {
           actions.push({
             label: "Написать",
             color: "blue",
-            onClick: () => console.log(`Сообщение ${user.id}`),
+            onClick: () => navigate("/chats/" + user.id),
           });
         } else if (user.status === "pending") {
+          actions.push({
+            label: "Принять запрос",
+            color: "blue",
+            onClick: () => friendStore.acceptRequest(user.id),
+          });
+          actions.push({
+            label: "Отклонить запрос",
+            color: "red",
+            onClick: () => friendStore.rejectRequest(user.id),
+          });
+        } else if (user.status === "sended") {
           actions.push({
             label: "Запрос отправлен",
             color: "gray",
