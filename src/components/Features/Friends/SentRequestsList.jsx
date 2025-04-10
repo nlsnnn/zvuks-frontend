@@ -19,10 +19,6 @@ export const SentRequestsList = observer(() => {
       </div>
     );
 
-  const handleCancelRequest = (id) => {
-    console.log(`Отменить запрос для id ${id}`);
-  };
-
   return (
     <div>
       <div className="space-y-2">
@@ -32,9 +28,9 @@ export const SentRequestsList = observer(() => {
             friend={request}
             actions={[
               {
-                label: "Отменить запрос",
-                color: "red",
-                onClick: () => handleCancelRequest(request.id),
+                label: "Запрос отправлен",
+                color: "gray",
+                disabled: true,
               },
             ]}
           />

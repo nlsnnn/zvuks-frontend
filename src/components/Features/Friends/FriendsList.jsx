@@ -1,9 +1,11 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { friendStore } from "../../../store/friendStore";
 import { FriendCard } from "../../UI/FriendCard";
 
 export const FriendsList = observer(() => {
+  const navigate = useNavigate();
   useEffect(() => {
     friendStore.getFriends();
   }, []);
@@ -25,7 +27,7 @@ export const FriendsList = observer(() => {
             {
               label: "Написать",
               color: "blue",
-              onClick: () => console.log(`Сообщение ${friend.id}`),
+              onClick: () => navigate("/chats/" + friend.id),
             },
             {
               label: "Удалить",

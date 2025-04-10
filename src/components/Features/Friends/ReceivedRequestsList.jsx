@@ -13,15 +13,11 @@ export const ReceivedRequestsList = observer(() => {
   if (friendStore.error)
     return <div className="text-red-500 text-center">{friendStore.error}</div>;
   if (!friendStore.pending.length)
-    return <div className="text-center text-gray-500">У вас нет друзей</div>;
-
-  const handleAcceptRequest = (id) => {
-    console.log(`Принять запрос от id ${id}`);
-  };
-
-  const handleRejectRequest = (id) => {
-    console.log(`Отклонить запрос от id ${id}`);
-  };
+    return (
+      <div className="text-center text-gray-500">
+        У вас нет запросов в друзья
+      </div>
+    );
 
   return (
     <div>
@@ -34,12 +30,12 @@ export const ReceivedRequestsList = observer(() => {
               {
                 label: "Принять",
                 color: "green",
-                onClick: () => handleAcceptRequest(request.id),
+                onClick: () => friendStore.acceptRequest(request.id),
               },
               {
                 label: "Отклонить",
                 color: "red",
-                onClick: () => handleRejectRequest(request.id),
+                onClick: () => friendStore.rejectRequest(request.id),
               },
             ]}
           />
