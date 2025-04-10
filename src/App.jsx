@@ -5,16 +5,29 @@ import { Home } from "./components/Pages/Home";
 import { Friends } from "./components/Pages/Friends";
 import { Login } from "./components/Pages/Login";
 import { Register } from "./components/Pages/Register";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/friends" element={<Friends />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route element={<MainLayout />}>
+          <Route
+            path="/"
+            element={
+                <Home />
+            }
+          />
+          <Route
+            path="/friends"
+            element={
+              <ProtectedRoute>
+                <Friends />
+              </ProtectedRoute>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>
