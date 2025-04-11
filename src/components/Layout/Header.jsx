@@ -4,6 +4,7 @@ import { SearchBar } from "../Features/SearchBar";
 import { Link, useNavigate } from "react-router-dom";
 import { userStore } from "../../store/userStore";
 import { observer } from "mobx-react-lite";
+import { sidebarRoutes } from "../../config/routes";
 
 export const Header = observer(() => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -44,15 +45,16 @@ export const Header = observer(() => {
 
       {menuOpen && (
         <div className="absolute top-16 left-0 w-full bg-white shadow-md border-t border-gray-200 flex flex-col px-4 py-2 md:hidden">
-          <Link to="/" className="py-2 text-gray-800">
-            Главная
-          </Link>
-          <Link to="/profile" className="py-2 text-gray-800">
-            Профиль
-          </Link>
-          <Link to="/upload" className="py-2 text-gray-800">
-            Загрузить
-          </Link>
+          {sidebarRoutes.map((route, i) => (
+            <Link
+              to={route.href}
+              key={i}
+              onClick={() => setMenuOpen(false)}
+              className="py-2 text-gray-800"
+            >
+              {route.title}
+            </Link>
+          ))}
         </div>
       )}
     </header>
