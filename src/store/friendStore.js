@@ -1,4 +1,3 @@
-// src/store/friendStore.js
 import { makeAutoObservable } from "mobx";
 import { FriendService } from "../service/friendService";
 import { UserService } from "../service/userService";
@@ -66,8 +65,8 @@ class FriendStore {
   async sendRequest(id) {
     try {
       await FriendService.sendRequest({ user_received_id: id });
-      this.getSended(); // Обновляем отправленные запросы
-      this.searchUsers(""); // Обновляем поиск
+      this.getSended();
+      this.searchUsers("");
     } catch (e) {
       this.error = "Ошибка отправки запроса";
     }

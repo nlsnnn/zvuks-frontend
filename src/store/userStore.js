@@ -5,6 +5,8 @@ class UserStore {
   user = null;
   userProfile = null;
   isCheckingAuth = false;
+  loading = false;
+  error = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -82,12 +84,15 @@ class UserStore {
   }
 
   async getProfile(userId) {
+    this.loading = true;
     try {
       const response = await UserService.getProfile(userId);
       this.userProfile = response.data;
       return response.data;
     } catch (e) {
-      console.log(e);
+      this.error = "Ошибка загрузки профиля";
+    } finally {
+      this.loading = false;
     }
   }
 
