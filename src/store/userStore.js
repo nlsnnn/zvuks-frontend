@@ -4,6 +4,7 @@ import { UserService } from "../service/userService";
 class UserStore {
   user = null;
   userProfile = null;
+  isCheckingAuth = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -60,11 +61,14 @@ class UserStore {
   }
 
   async checkAuth() {
+    this.isCheckingAuth = true;
     try {
       const response = await UserService.getMe();
       this.user = response.data;
     } catch (e) {
       this.user = null;
+    } finally {
+      this.isCheckingAuth = false;
     }
   }
 

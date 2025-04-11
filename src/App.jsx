@@ -8,6 +8,7 @@ import { Friends } from "./components/Pages/Friends";
 import { Login } from "./components/Pages/Login";
 import { Register } from "./components/Pages/Register";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { GuestRoute } from "./components/GuestRoute";
 import { ResetPassword } from "./components/Pages/ResetPassword";
 import { ResetPasswordConfirm } from "./components/Pages/ResetPasswordConfirm";
 
@@ -16,13 +17,38 @@ function App() {
     <BrowserRouter>
       <ToastContainer />
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/login"
+          element={
+            <GuestRoute>
+              <Login />
+            </GuestRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <GuestRoute>
+              <Register />
+            </GuestRoute>
+          }
+        />
 
-        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route
+          path="/reset-password"
+          element={
+            <GuestRoute>
+              <ResetPassword />
+            </GuestRoute>
+          }
+        />
         <Route
           path="/reset-password/confirm/:token"
-          element={<ResetPasswordConfirm />}
+          element={
+            <GuestRoute>
+              <ResetPasswordConfirm />
+            </GuestRoute>
+          }
         />
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />

@@ -3,8 +3,9 @@ import { FiMenu } from "react-icons/fi";
 import { SearchBar } from "../Features/SearchBar";
 import { Link, useNavigate } from "react-router-dom";
 import { userStore } from "../../store/userStore";
+import { observer } from "mobx-react-lite";
 
-export const Header = () => {
+export const Header = observer(() => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -56,4 +57,4 @@ export const Header = () => {
       )}
     </header>
   );
-};
+});
