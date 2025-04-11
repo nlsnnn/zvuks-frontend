@@ -44,6 +44,21 @@ class UserStore {
     }
   }
 
+  async resetPasswordRequest(email) {
+    const response = await UserService.resetPasswordRequest({
+      email: email,
+    });
+    return response;
+  }
+
+  async resetPasswordConfirm(token, newPassword) {
+    const response = await UserService.resetPasswordConfirm({
+      token: token,
+      newPassword: newPassword,
+    });
+    return response;
+  }
+
   async checkAuth() {
     try {
       const response = await UserService.getMe();
@@ -74,12 +89,12 @@ class UserStore {
 
   async updateProfile(avatar) {
     try {
-      const formData = new FormData()
-      formData.append("avatar", avatar)
-      const response = await UserService.updateProfile(formData)
-      return response
+      const formData = new FormData();
+      formData.append("avatar", avatar);
+      const response = await UserService.updateProfile(formData);
+      return response;
     } catch (e) {
-      return false
+      return false;
     }
   }
 }

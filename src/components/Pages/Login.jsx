@@ -77,7 +77,9 @@ export const Login = () => {
               <p className="form-error">{errors.password.message}</p>
             )}
           </div>
-          {errors.other && <p className="form-error text-center">{errors.other.message}</p>}
+          {errors.other && (
+            <p className="form-error text-center">{errors.other.message}</p>
+          )}
 
           <button
             type="submit"
@@ -86,12 +88,17 @@ export const Login = () => {
             Войти
           </button>
         </form>
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Нет аккаунта?{" "}
-          <Link to="/register" className="text-blue-600 hover:underline">
-            Регистрация
+        <div className="mt-4 flex justify-between text-sm">
+          <p className="text-gray-600">
+            Нет аккаунта?{" "}
+            <Link to="/register" className="text-blue-600 hover:underline">
+              Регистрация
+            </Link>
+          </p>
+          <Link to="/reset-password" className="text-blue-600 hover:underline">
+            Забыли пароль?
           </Link>
-        </p>
+        </div>
       </div>
     </div>
   );

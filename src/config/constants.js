@@ -8,6 +8,8 @@ export const me = "/auth/me/";
 export const search = "/auth/user/search/";
 export const profile = (userId) => `/auth/user/profile/${userId}`;
 export const updateProfile = "auth/user/update"
+export const passwordResetRequest = "/auth/password-reset"
+export const passwordResetConfirm = "/auth/password-reset/confirm"
 
 // Friends
 export const friends = "/friends";
