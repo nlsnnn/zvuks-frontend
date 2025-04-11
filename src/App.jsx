@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { MainLayout } from "./components/Layout/MainLayout";
 import { Home } from "./components/Pages/Home";
@@ -12,6 +14,7 @@ import { ResetPasswordConfirm } from "./components/Pages/ResetPasswordConfirm";
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -21,7 +24,6 @@ function App() {
           path="/reset-password/confirm/:token"
           element={<ResetPasswordConfirm />}
         />
-
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route

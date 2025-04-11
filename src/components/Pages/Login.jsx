@@ -41,9 +41,6 @@ export const Login = () => {
       }
       console.log(errors);
     } catch (e) {
-      console.error(e);
-      console.log(e.message);
-      console.log(errors.other);
       setError("other", { type: "custom", message: e.message });
     }
   };

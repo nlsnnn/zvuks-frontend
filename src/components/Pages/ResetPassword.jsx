@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { userStore } from "../../store/userStore";
 import { Input } from "../UI/Input";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const schema = z.object({
   email: z.string().email("Некорректный email"),
@@ -28,9 +29,17 @@ export const ResetPassword = () => {
   const onSubmit = async (data) => {
     try {
       await userStore.resetPasswordRequest(data.email);
+      toast.success("Письмо для сброса пароля отправлено", {
+        position: "top-center",
+        closeOnClick: true,
+      });
     } catch (e) {
       const errorMessage = e.message || "Неизвестная ошибка";
-      setError("email", { type: "custom", message: errorMessage });
+      toast.error(errorMessage, {
+        position: "top-center",
+        hideProgressBar: true,
+        closeOnClick: true,
+      });
     }
   };
 

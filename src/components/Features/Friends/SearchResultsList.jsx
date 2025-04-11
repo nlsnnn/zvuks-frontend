@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 import { friendStore } from "../../../store/friendStore";
 import { FriendCard } from "../../UI/FriendCard";
 import { useNavigate } from "react-router-dom";
+import { userStore } from "../../../store/userStore";
 
 export const SearchResultsList = observer(({ searchQuery }) => {
   const navigate = useNavigate();
@@ -17,7 +18,13 @@ export const SearchResultsList = observer(({ searchQuery }) => {
     <div className="space-y-2">
       {friendStore.searchResults.map((user) => {
         const actions = [];
-        if (user.status === "friends") {
+        if (user.id == userStore.user.id) {
+          actions.push({
+            label: "Профиль",
+            color: "blue",
+            onClick: () => navigate("/profile"),
+          });
+        } else if (user.status === "friends") {
           actions.push({
             label: "Написать",
             color: "blue",
