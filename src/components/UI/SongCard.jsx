@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import { FaPlay, FaHeart, FaStop } from "react-icons/fa";
 import { songStore } from "../../store/songStore";
 import { favoriteStore } from "../../store/favoriteStore";
+import { observer } from "mobx-react-lite";
 
-export const SongCard = ({ song, isPlaying }) => {
+export const SongCard = observer(({ song, isPlaying }) => {
   const handleCardClick = (e) => {
     e.stopPropagation();
     songStore.playSong(songStore.songs.indexOf(song));
@@ -58,7 +59,7 @@ export const SongCard = ({ song, isPlaying }) => {
           }}
           className={`p-2 rounded-full ${
             song.favorite
-              ? "bg-red-100 text-red-500 hover:text-red-200"
+              ? "text-red-500 hover:text-red-400 hover:bg-red-100"
               : "text-gray-500 hover:text-red-500 hover:bg-red-200"
           } transition-all cursor-pointer`}
         >
@@ -67,4 +68,4 @@ export const SongCard = ({ song, isPlaying }) => {
       </div>
     </div>
   );
-};
+});
