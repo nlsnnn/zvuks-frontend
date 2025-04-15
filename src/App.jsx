@@ -54,8 +54,22 @@ function App() {
         />
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<ProfileRedirect />} />
-          <Route path="/profile/:userId" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfileRedirect />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile/:userId"
+            element={
+              <ProtectedRoute>
+                <Profile />{" "}
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/friends"
             element={
