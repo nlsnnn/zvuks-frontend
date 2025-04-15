@@ -1,8 +1,12 @@
+import { SongList } from "../Features/Songs/SongList";
+
 export const Home = () => {
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4 text-gray-900">Добро пожаловать</h1>
-      <p className="text-gray-700">Это главная страница</p>
+      <h1 className="text-2xl font-bold mb-4 text-gray-900">
+        Популярные треки
+      </h1>
+      <SongList />
     </div>
   );
 };

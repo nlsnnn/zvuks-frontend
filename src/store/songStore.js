@@ -45,7 +45,7 @@ class SongStore {
     if (index === this.currentSongIndex && this.isPlaying) {
       this.currentHowl.pause();
       return;
-    } else if (index === this.currentSongIndex && !(this.isPlaying)) {
+    } else if (index === this.currentSongIndex && !this.isPlaying) {
       this.currentHowl.play();
       return;
     }
@@ -63,6 +63,7 @@ class SongStore {
       loop: false,
       autoplay: true,
       volume: this.volume,
+      html5: true,
       onend: () => this.playNext(),
       onplay: () => {
         this.isPlaying = true;
@@ -81,6 +82,12 @@ class SongStore {
     this.currentHowl.on("play", () => {
       this.updateTime();
     });
+  }
+
+  playSingleSong(song) {
+    this.songs = [song];
+    this.currentSongIndex = 0;
+    this.playSong(0);
   }
 
   playNext() {
