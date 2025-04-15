@@ -90,7 +90,7 @@ export const Player = observer(() => {
                   ? "text-red-500 hover:text-gray-500"
                   : "text-gray-500 hover:text-red-500"
               }`}
-              onClick={() => onFavorite()}
+              onClick={() => favoriteStore.toggleSong(song)}
             >
               <FaHeart />
             </button>

@@ -11,11 +11,7 @@ export const SongCard = ({ song, isPlaying }) => {
 
   const onFavorite = (e) => {
     e.stopPropagation();
-    if (song.favorite) {
-      favoriteStore.removeSong(song.id);
-    } else {
-      favoriteStore.addSong(song.id);
-    }
+    favoriteStore.toggleSong(song);
   };
 
   return (
@@ -48,11 +44,11 @@ export const SongCard = ({ song, isPlaying }) => {
           onClick={(e) => {
             handleCardClick(e);
           }}
-          className={`p-2 rounded-full ${
+          className={`p-2 rounded-full hover:shadow-lg ${
             isPlaying
-              ? "bg-blue-100 text-blue-600"
-              : "text-blue-500 hover:text-blue-700"
-          } transition-colors`}
+              ? "bg-blue-100 text-blue-600 "
+              : "text-blue-500 hover:text-blue-700 hover:bg-blue-200 "
+          } transition-all cursor-pointer`}
         >
           {isPlaying ? <FaStop /> : <FaPlay />}
         </button>
@@ -60,7 +56,11 @@ export const SongCard = ({ song, isPlaying }) => {
           onClick={(e) => {
             onFavorite(e);
           }}
-          className="p-2 text-gray-500 hover:text-red-500 transition-colors"
+          className={`p-2 rounded-full ${
+            song.favorite
+              ? "bg-red-100 text-red-500 hover:text-red-200"
+              : "text-gray-500 hover:text-red-500 hover:bg-red-200"
+          } transition-all cursor-pointer`}
         >
           <FaHeart />
         </button>

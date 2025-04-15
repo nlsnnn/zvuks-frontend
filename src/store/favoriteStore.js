@@ -36,7 +36,7 @@ class FavoriteStore {
 
   async removeSong(songId) {
     const data = {
-      song_id: songId
+      song_id: songId,
     };
     console.log(data);
     await FavoriteService.removeSong(data);
@@ -44,9 +44,17 @@ class FavoriteStore {
 
   async removeAlbum(albumId) {
     const data = {
-      album_id: albumId
+      album_id: albumId,
     };
     await FavoriteService.removeAlbum(data);
+  }
+
+  async toggleSong(song) {
+    if (song.favorite) {
+      favoriteStore.removeSong(song.id);
+    } else {
+      favoriteStore.addSong(song.id);
+    }
   }
 }
 
