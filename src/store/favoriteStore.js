@@ -52,8 +52,10 @@ class FavoriteStore {
   async toggleSong(song) {
     if (song.favorite) {
       favoriteStore.removeSong(song.id);
+      song.favorite = false;
     } else {
       favoriteStore.addSong(song.id);
+      song.favorite = true;
     }
   }
 }
