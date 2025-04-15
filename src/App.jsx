@@ -11,6 +11,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { GuestRoute } from "./components/GuestRoute";
 import { ResetPassword } from "./components/Pages/ResetPassword";
 import { ResetPasswordConfirm } from "./components/Pages/ResetPasswordConfirm";
+import { Profile } from "./components/Pages/Profile";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         />
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/profile/:userId" element={<Profile />} />
           <Route
             path="/friends"
             element={
