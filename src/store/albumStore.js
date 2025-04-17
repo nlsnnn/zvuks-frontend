@@ -5,6 +5,8 @@ class AlbumStore {
   album = null;
   albums = [];
   albumSongs = [];
+  loading = false;
+  error = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -24,19 +26,21 @@ class AlbumStore {
     try {
       const response = await AlbumService.getAlbums();
       console.log(response);
-      this.albums = response.data.albums
+      this.albums = response.data.albums;
     } catch (e) {
       console.log(e);
     }
   }
 
   async getAlbumSongs(albumId) {
+    this.loading = true;
     try {
       const response = await AlbumService.getAlbumSongs(albumId);
-      this.albumSongs = response.data.songs
-      
+      this.albumSongs = response.data.songs;
     } catch (e) {
-      console.log(e);
+      this.error = "Ошибка при получении песен альбома"
+    } finally {
+      this.loading = false;
     }
   }
 
@@ -46,14 +50,14 @@ class AlbumStore {
       formData.append("name", name);
       formData.append("release_date", date);
       formData.append("cover", cover);
-      const songFiles = []
-      const songNames = []
-      const songNumbers = []
+      const songFiles = [];
+      const songNames = [];
+      const songNumbers = [];
 
       songs.forEach((song) => {
-        songFiles.push(song.file)
-        songNames.push(song.name)
-        songNumbers.push(+song.trackNumber)
+        songFiles.push(song.file);
+        songNames.push(song.name);
+        songNumbers.push(+song.trackNumber);
       });
       songs.forEach((song, index) => {
         formData.append(`songs`, song.file);

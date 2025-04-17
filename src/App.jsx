@@ -13,6 +13,7 @@ import { ResetPassword } from "./components/Pages/ResetPassword";
 import { ResetPasswordConfirm } from "./components/Pages/ResetPasswordConfirm";
 import { Profile } from "./components/Pages/Profile";
 import { ProfileRedirect } from "./components/Pages/redirect/ProfileRedirect";
+import { Album } from "./components/Pages/Album";
 
 function App() {
   return (
@@ -78,6 +79,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/album/:albumId" element={<Album />} />
         </Route>
       </Routes>
     </BrowserRouter>
