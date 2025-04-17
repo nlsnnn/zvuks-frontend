@@ -21,18 +21,18 @@ export const Friends = observer(() => {
   };
 
   return (
-    <div className="p-4  mx-auto">
-      <h1 className="text-2xl font-bold mb-6 text-gray-900">Друзья</h1>
+    <div className="p-4 mx-auto ">
+      <h1 className="text-2xl font-bold mb-6 text-[var(--color-dark)]">Друзья</h1>
       <div className="flex flex-col sm:flex-row justify-between gap-4 mb-6">
         <div className="flex flex-wrap gap-2">
           {["friends", "sent", "received"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 rounded-md font-medium transition-colors ${
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 activeTab === tab
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  ? "bg-[var(--color-primary)] text-white"
+                  : "bg-gray-200 text-[var(--color-dark)] hover:bg-gray-300"
               }`}
             >
               {tab === "friends" && "Мои друзья"}
@@ -46,7 +46,7 @@ export const Friends = observer(() => {
           value={searchQuery}
           onChange={(e) => handleSearch(e.target.value)}
           placeholder="Поиск пользователей"
-          className="p-2 border border-gray-300 rounded-md w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="p-2 border border-gray-300 rounded-md w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
         />
       </div>
       {activeTab === "friends" && <FriendsList />}

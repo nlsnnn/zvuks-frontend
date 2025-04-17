@@ -1,29 +1,36 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { sidebarRoutes } from "../../config/routes";
-import { useState } from "react";
 
 export const Sidebar = () => {
-  const [activeTab, setActiveTab] = useState("/");
+  const { pathname } = useLocation();
 
   return (
-    <aside className="w-56 p-6 bg-white/50 backdrop-blur-md border-r border-gray-200 hidden md:flex flex-col justify-between">
-      <nav className="flex flex-col gap-4 text-base font-medium text-gray-800">
-        {sidebarRoutes.map((route, i) => (
-          <Link
-            to={route.href}
-            onClick={() => setActiveTab(route.href)}
-            key={i}
-            className={
-              "flex items-center gap-3 p-2 rounded-md transition-colors duration-200 " +
-              (activeTab === route.href
-                ? " text-blue-600 bg-blue-100"
-                : " hover:text-blue-500 hover:bg-blue-50")
-            }
-          >
-            <route.icon className="w-5 h-5" />
-            {route.title}
-          </Link>
-        ))}
+    <aside className="w-56 p-6 glass-card hidden md:flex flex-col gap-4">
+      <nav className="flex flex-col gap-2 text-[var(--color-dark)]">
+        {sidebarRoutes.map((route, i) => {
+          const isActive = pathname.split('/')[1] === route.href.split('/')[1];
+          return (
+            <Link
+              key={i}
+              to={route.href}
+              className={
+                "flex items-center gap-3 px-4 py-2 rounded-lg transition font-medium " +
+                (isActive
+                  ? " bg-[var(--color-primary)] text-white shadow-sm"
+                  : " hover:bg-[var(--color-primary)]/10 text-[var(--color-dark)]")
+              }
+            >
+              <route.icon
+                className={`text-lg ${
+                  isActive
+                    ? "text-white"
+                    : "text-[var(--color-primary)] group-hover:text-white"
+                }`}
+              />
+              <span>{route.title}</span>
+            </Link>
+          );
+        })}
       </nav>
     </aside>
   );

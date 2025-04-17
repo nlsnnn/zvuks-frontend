@@ -17,22 +17,22 @@ export const SongCard = observer(({ song, isPlaying }) => {
 
   return (
     <div
-      className="flex items-center gap-4 p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer"
+      className="glass-card p-4 flex items-center gap-4 transition hover:shadow-xl  cursor-pointer"
       onClick={handleCardClick}
     >
       <img
         src={song.cover}
         alt={song.title}
-        className="w-16 h-16 object-cover rounded-md"
+        className="w-16 h-16 object-cover rounded-lg shadow-md"
       />
       <div className="flex-1 min-w-0">
-        <div className="text-lg font-medium text-gray-900 truncate">
+        <div className="text-lg font-semibold text-[var(--color-dark)] truncate">
           {song.title}
         </div>
-        <div className="text-sm text-gray-600 truncate flex gap-2">
+        <div className="text-sm text-[var(--color-muted)] truncate flex gap-2">
           {song.artists.map((artist) => (
             <p
-              className="hover:text-blue-600 cursor-pointer w-max"
+              className="hover:text-[var(--color-primary)] transition"
               key={artist.id}
             >
               <Link to={`/profile/${artist.id}`}>{artist.username}</Link>
@@ -45,11 +45,11 @@ export const SongCard = observer(({ song, isPlaying }) => {
           onClick={(e) => {
             handleCardClick(e);
           }}
-          className={`p-2 rounded-full hover:shadow-lg ${
+          className={`p-2 rounded-full transition shadow ${
             isPlaying
-              ? "bg-blue-100 text-blue-600 "
-              : "text-blue-500 hover:text-blue-700 hover:bg-blue-200 "
-          } transition-all cursor-pointer`}
+              ? "bg-[var(--color-primary)] text-white"
+              : "bg-white text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white"
+          }`}
         >
           {isPlaying ? <FaStop /> : <FaPlay />}
         </button>
@@ -57,11 +57,11 @@ export const SongCard = observer(({ song, isPlaying }) => {
           onClick={(e) => {
             onFavorite(e);
           }}
-          className={`p-2 rounded-full ${
+          className={`p-2 rounded-full transition shadow ${
             song.favorite
-              ? "text-red-500 hover:text-red-400 hover:bg-red-100"
-              : "text-gray-500 hover:text-red-500 hover:bg-red-200"
-          } transition-all cursor-pointer`}
+              ? "text-red-500 hover:text-red-400 bg-red-50"
+              : "text-gray-400 hover:text-red-500 bg-white"
+          }`}
         >
           <FaHeart />
         </button>

@@ -16,41 +16,46 @@ export const Header = observer(() => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 flex items-center px-4 md:px-6 z-50 shadow-sm">
+    <header className="fixed top-0 left-0 right-0 h-16 glass-card flex items-center px-4 md:px-6 z-50">
       <button className="md:hidden mr-4" onClick={() => setMenuOpen(!menuOpen)}>
-        <FiMenu className="text-2xl text-gray-700" />
+        <FiMenu className="text-2xl text-[var(--color-primary)]" />
       </button>
-      <div className="hidden md:block text-xl font-bold mr-4 md:mr-8 text-blue-600">
-        Звукс
+      <div className="hidden md:block text-xl font-bold mr-4 md:mr-8 text-[var(--color-primary)]">
+        🎵 zvuks
       </div>
       <SearchBar />
       <div className="flex items-center gap-4 ml-auto">
         {userStore.user && (
           <>
-            <span>{userStore.user.username}</span>
+            <span className="font-medium text-[var(--color-dark)]">
+              {userStore.user.username}
+            </span>
             <button
               onClick={handleLogout}
-              className="text-red-500 hover:text-red-700 transition-colors duration-200 hover:underline cursor-pointer"
+              className="text-red-500 hover:text-red-600 transition"
             >
               Выйти
             </button>
           </>
         )}
         {!userStore.user && (
-          <Link to="/login" className="text-blue-600 hover:underline">
+          <Link
+            to="/login"
+            className="text-[var(--color-primary)] hover:underline"
+          >
             Войти
           </Link>
         )}
       </div>
 
       {menuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-white shadow-md border-t border-gray-200 flex flex-col px-4 py-2 md:hidden">
+        <div className="absolute top-16 left-0 w-full glass-card flex flex-col px-4 py-2 md:hidden">
           {sidebarRoutes.map((route, i) => (
             <Link
               to={route.href}
               key={i}
               onClick={() => setMenuOpen(false)}
-              className="py-2 text-gray-800"
+              className="py-2 text-[var(--color-dark)] hover:text-[var(--color-primary)]"
             >
               {route.title}
             </Link>
