@@ -85,6 +85,7 @@ class UserStore {
 
   async getProfile(userId) {
     this.loading = true;
+    this.error = null;
     try {
       const response = await UserService.getProfile(userId);
       this.userProfile = response.data;
