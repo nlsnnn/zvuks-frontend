@@ -11,7 +11,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: var(--color-light);
   color: var(--color-dark);
 }
@@ -29,6 +29,10 @@ body {
 
   .form-label {
     @apply block text-base pl-2 pb-1 font-medium text-gray-700;
+  }
+
+  .form-input {
+    @apply w-full p-2 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-[var(--color-primary)];
   }
 
   .btn-primary {

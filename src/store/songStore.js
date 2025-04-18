@@ -130,8 +130,8 @@ class SongStore {
     try {
       const form = new FormData();
       form.append("name", name);
-      form.append("release_date", date);
-      form.append("artist_ids", artists);
+      form.append("releaseDate", date);
+      form.append("artistIds", artists);
       form.append("song", song);
       form.append("cover", cover);
 

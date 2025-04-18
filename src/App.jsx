@@ -14,6 +14,7 @@ import { ResetPasswordConfirm } from "./components/Pages/ResetPasswordConfirm";
 import { Profile } from "./components/Pages/Profile";
 import { ProfileRedirect } from "./components/Pages/redirect/ProfileRedirect";
 import { Album } from "./components/Pages/Album";
+import { AddSong } from "./components/Pages/AddSong";
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
             }
           />
           <Route path="/album/:albumId" element={<Album />} />
+          <Route path="/songs/add" element={<AddSong />} />
         </Route>
       </Routes>
     </BrowserRouter>
