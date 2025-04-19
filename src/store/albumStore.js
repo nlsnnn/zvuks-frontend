@@ -38,37 +38,43 @@ class AlbumStore {
       const response = await AlbumService.getAlbumSongs(albumId);
       this.albumSongs = response.data.songs;
     } catch (e) {
-      this.error = "Ошибка при получении песен альбома"
+      this.error = "Ошибка при получении песен альбома";
     } finally {
       this.loading = false;
     }
   }
 
-  async addAlbum(name, date, cover, songs) {
+  async addAlbum(
+    title,
+    releaseDate,
+    cover,
+    songFiles,
+    songNames,
+    trackNumbers,
+    songArtistsIds
+  ) {
     try {
       const formData = new FormData();
-      formData.append("name", name);
-      formData.append("release_date", date);
-      formData.append("cover", cover);
-      const songFiles = [];
-      const songNames = [];
-      const songNumbers = [];
 
-      songs.forEach((song) => {
-        songFiles.push(song.file);
-        songNames.push(song.name);
-        songNumbers.push(+song.trackNumber);
-      });
-      songs.forEach((song, index) => {
-        formData.append(`songs`, song.file);
-        formData.append(`song_names`, song.name);
-        formData.append(`track_numbers`, song.trackNumber.toString());
-      });
+      formData.append("title", title);
+      formData.append("releaseDate", releaseDate);
+      formData.append("cover", cover);
+
+      songFiles.forEach((file) => formData.append("songs", file));
+      songNames.forEach((name) => formData.append("songNames", name));
+      trackNumbers.forEach((num) =>
+        formData.append("trackNumbers", num.toString())
+      );
+      formData.append("songArtistsIds", JSON.stringify(songArtistsIds));
+
+      console.log(songArtistsIds);
+
 
       const response = await AlbumService.addAlbum(formData);
+
       return response;
     } catch (e) {
-      console.log(e);
+      console.error("Ошибка при создании альбома:", e);
       return false;
     }
   }
