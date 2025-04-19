@@ -31,11 +31,12 @@ export const SongCard = observer(({ song, isPlaying }) => {
         </div>
         <div className="text-sm text-[var(--color-muted)] truncate flex gap-2">
           {song.artists.map((artist, i) => (
-            <>
+            <div key={artist.id}>
               <p
                 className="hover:text-[var(--color-primary)] transition"
-                key={artist.id}
-                onClick={(e) => {e.stopPropagation();}}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
               >
                 <Link to={`/profile/${artist.id}`}>
                   {artist.username}
@@ -44,7 +45,7 @@ export const SongCard = observer(({ song, isPlaying }) => {
                   )}
                 </Link>
               </p>
-            </>
+            </div>
           ))}
         </div>
       </div>

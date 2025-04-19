@@ -1,9 +1,10 @@
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { albumStore } from "../../store/albumStore";
 import { SongCard } from "../../components/UI/SongCard";
 import { songStore } from "../../store/songStore";
+import { formatDate } from "../../utils";
 
 export const Album = observer(() => {
   const { albumId } = useParams();
@@ -11,14 +12,16 @@ export const Album = observer(() => {
   useEffect(() => {
     if (albumId) {
       albumStore.getAlbum(albumId);
-      albumStore.getAlbumSongs(albumId);
+      albumStore.getAlbumSongs(albumId).then(() => {
+        songStore.loadOtherSongs(albumStore.albumSongs);
+      });
     }
   }, [albumId]);
 
   const album = albumStore.album;
   const songs = albumStore.albumSongs;
 
-  if (albumStore.loading) {
+  if (albumStore.loading || !album) {
     return <div className="text-center">Загрузка...</div>;
   }
 
@@ -38,9 +41,14 @@ export const Album = observer(() => {
           <h2 className="text-3xl font-bold text-[var(--color-dark)]">
             {album.title}
           </h2>
-          <p className="text-xl text-[var(--color-muted)]">{album.artist}</p>
+          <Link
+            to={`/profile/${album.artist.id}`}
+            className="text-xl text-[var(--color-muted)] w-full hover:text-[var(--color-primary)] transition"
+          >
+            {album.artist.username}
+          </Link>
           <p className="text-sm text-[var(--color-muted)] mt-2">
-            {album.releaseDate}
+            {formatDate(album.releaseDate)}
           </p>
         </div>
       </div>

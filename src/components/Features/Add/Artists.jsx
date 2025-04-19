@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { userStore } from "../../../store/userStore";
-import { FaCrosshairs } from "react-icons/fa6";
 
 export const Artists = ({ selectedAuthors, setSelectedAuthors }) => {
   const [searchQuery, setSearchQuery] = useState("");
