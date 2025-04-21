@@ -97,10 +97,13 @@ class UserStore {
     }
   }
 
-  async updateProfile(avatar) {
+  async updateProfile(data) {
     try {
       const formData = new FormData();
-      formData.append("avatar", avatar);
+
+      if (data.avatar) formData.append("avatar", data.avatar);
+      if (data.description) formData.append("bio", data.description);
+
       const response = await UserService.updateProfile(formData);
       return response;
     } catch (e) {
