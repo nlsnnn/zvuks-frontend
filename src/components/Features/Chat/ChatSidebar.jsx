@@ -8,12 +8,12 @@ export const ChatSidebar = observer(({ activeChat, setActiveChat }) => {
   }, []);
 
   return (
-    <aside className="w-72 hidden md:block border-r bg-white overflow-y-auto">
-      <div className="p-4 font-semibold text-lg">Диалоги</div>
+    <aside className="w-full md:w-72 md:border-r bg-white overflow-y-auto">
+      <div className="p-4 font-semibold text-lg text-center md:text-left">Диалоги</div>
       {friendStore.friends.map((friend) => (
         <div
           key={friend.id}
-          className={`flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-100 transition ${
+          className={`flex border-b md:border-none items-center gap-3 p-3 cursor-pointer hover:bg-gray-100 transition ${
             activeChat?.id === friend.id ? "bg-gray-100" : ""
           }`}
           onClick={() => setActiveChat(friend)}

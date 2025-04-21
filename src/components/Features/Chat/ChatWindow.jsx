@@ -11,27 +11,20 @@ export const ChatWindow = observer(({ activeChat, setActiveChat }) => {
 
   useEffect(() => {
     if (activeChat) {
-      chatStore.getMessages(activeChat.id);
+      chatStore.getMessages(activeChat.id).then(() => {
+        setTimeout(() => {
+          bottomRef.current?.scrollIntoView({ behavior: "auto" });
+        }, 100);
+      });
 
       const ws = new WebSocket(websocketURL + activeChat.id);
 
-      ws.onopen = () => {
-        console.log("Websocket start!");
-      };
-
       ws.onmessage = (event) => {
         const msg = JSON.parse(event.data);
-
         chatStore.messages = [...chatStore.messages, msg];
       };
 
-      ws.onclose = () => {
-        console.log("Websocket end!");
-      };
-
-      return () => {
-        ws.close();
-      };
+      return () => ws.close();
     }
   }, [activeChat]);
 
@@ -54,11 +47,9 @@ export const ChatWindow = observer(({ activeChat, setActiveChat }) => {
   };
 
   const handleInputSend = (key) => {
-    if (key == "Enter") {
-      if (text.trim()) {
-        chatStore.sendMessage(activeChat.id, text.trim());
-        setText("");
-      }
+    if (key === "Enter" && text.trim()) {
+      chatStore.sendMessage(activeChat.id, text.trim());
+      setText("");
     }
   };
 
@@ -79,14 +70,12 @@ export const ChatWindow = observer(({ activeChat, setActiveChat }) => {
         >
           Назад
         </button>
-
-        <span>{activeChat.username}</span>
+        <span className="truncate">{activeChat.username}</span>
       </div>
-      <div className="p-4 border-b font-semibold text-dark"></div>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-2">
-        {chatStore.messages.map((msg, i) => (
-          <Message key={i} msg={msg} />
+      <div ref={containerRef} className="flex-1 overflow-y-auto p-4 space-y-2">
+        {chatStore.messages.map((msg) => (
+          <Message key={msg.id} msg={msg} />
         ))}
         {!chatStore.messages.length && (
           <p className="text-lg text-center p-16 text-muted">
