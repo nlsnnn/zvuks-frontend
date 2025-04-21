@@ -18,6 +18,7 @@ import { AddSong } from "./components/Pages/AddSong";
 import { AddAlbum } from "./components/Pages/AddAlbum";
 import { Favorite } from "./components/Pages/Favorite";
 import { Chat } from "./components/Pages/Chat";
+import { EditProfile } from "./components/Pages/EditProfile";
 
 function App() {
   return (
@@ -88,6 +89,7 @@ function App() {
           <Route path="/albums/add" element={<AddAlbum />} />
           <Route path="/favorites" element={<Favorite />} />
           <Route path="/chats" element={<Chat />} />
+          <Route path="/profile/edit" element={<EditProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>
