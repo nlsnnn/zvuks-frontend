@@ -37,6 +37,7 @@ export const Login = () => {
     try {
       await userStore.login(data.identifier, data.password);
       if (userStore.user) {
+        userStore.checkAuth()
         navigate("/");
       }
       console.log(errors);

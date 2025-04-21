@@ -13,7 +13,15 @@ export const AlbumCard = ({ album }) => {
       />
       <div className="text-center text-[var(--color-dark)]">
         <div className="text-lg font-semibold">{album.title}</div>
-        <div className="text-sm text-[var(--color-muted)]">{album.artist}</div>
+        <Link
+          to={`/profile/${album.artist.id}`}
+          className="text-sm text-muted hover:text-[var(--color-primary)] transition"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          {album.artist.username}
+        </Link>
       </div>
     </Link>
   );

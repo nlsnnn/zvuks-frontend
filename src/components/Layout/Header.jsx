@@ -20,7 +20,7 @@ export const Header = observer(() => {
       <button className="md:hidden mr-4" onClick={() => setMenuOpen(!menuOpen)}>
         <FiMenu className="text-2xl text-[var(--color-primary)]" />
       </button>
-      <div className="hidden md:block text-xl font-bold mr-4 md:mr-8 text-[var(--color-primary)]">
+      <div className="hidden md:block text-xl font-bold mr-4 md:mr-8 text-[var(--color-primary)] select-none">
         🎵 zvuks
       </div>
       <SearchBar />
