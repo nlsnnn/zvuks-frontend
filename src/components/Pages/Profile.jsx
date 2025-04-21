@@ -31,6 +31,9 @@ export const Profile = observer(() => {
         <h2 className="text-2xl font-bold text-[var(--color-dark)]">
           {user.username || "Пользователь"}
         </h2>
+        <p className="text-gray-700 text-center mt-2">
+          {user.bio || "Пользователь не добавил описание"}
+        </p>
         {userStore.user.id == userId && (
           <Link
             to="/profile/edit"
