@@ -36,7 +36,7 @@ body {
   }
 
   .file-input {
-    @apply w-full bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition
+    @apply w-full bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition;
   }
 
   .btn-primary {
@@ -45,6 +45,18 @@ body {
 
   .btn-outline {
     @apply border border-[var(--color-primary)] text-[var(--color-primary)] rounded-lg px-4 py-2 hover:bg-[var(--color-primary)] hover:text-white transition;
+  }
+
+  .text-dark {
+    @apply text-[var(--color-dark)];
+  }
+
+  .text-muted {
+    @apply text-[var(--color-muted)];
+  }
+
+  .text-primary {
+    @apply text-[var(--color-primary)];
   }
 
   .glass-card {

@@ -16,6 +16,7 @@ import { ProfileRedirect } from "./components/Pages/redirect/ProfileRedirect";
 import { Album } from "./components/Pages/Album";
 import { AddSong } from "./components/Pages/AddSong";
 import { AddAlbum } from "./components/Pages/AddAlbum";
+import { Favorite } from "./components/Pages/Favorite";
 
 function App() {
   return (
@@ -84,6 +85,7 @@ function App() {
           <Route path="/album/:albumId" element={<Album />} />
           <Route path="/songs/add" element={<AddSong />} />
           <Route path="/albums/add" element={<AddAlbum />} />
+          <Route path="/favorites" element={<Favorite />} />
         </Route>
       </Routes>
     </BrowserRouter>

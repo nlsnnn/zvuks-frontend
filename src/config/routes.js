@@ -1,4 +1,10 @@
-import { FaUser, FaUserGroup, FaComment, FaMusic } from "react-icons/fa6";
+import {
+  FaUser,
+  FaUserGroup,
+  FaComment,
+  FaMusic,
+  FaHeart,
+} from "react-icons/fa6";
 
 export const sidebarRoutes = [
   {
@@ -10,6 +16,11 @@ export const sidebarRoutes = [
     href: "/profile",
     icon: FaUser,
     title: "Профиль",
+  },
+  {
+    href: "/favorites",
+    icon: FaHeart,
+    title: "Моя музыка",
   },
   {
     href: "/friends",
