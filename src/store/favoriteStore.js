@@ -58,6 +58,16 @@ class FavoriteStore {
       song.favorite = true;
     }
   }
+
+  async toggleAlbum(album) {
+    if (album.favorite) {
+      favoriteStore.removeAlbum(album.id);
+      album.favorite = false;
+    } else {
+      favoriteStore.addAlbum(album.id);
+      album.favorite = true;
+    }
+  }
 }
 
 export const favoriteStore = new FavoriteStore();

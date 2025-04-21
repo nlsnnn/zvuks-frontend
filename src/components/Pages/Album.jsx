@@ -5,6 +5,8 @@ import { albumStore } from "../../store/albumStore";
 import { SongCard } from "../../components/UI/SongCard";
 import { songStore } from "../../store/songStore";
 import { formatDate } from "../../utils";
+import { FaHeart } from "react-icons/fa";
+import { favoriteStore } from "../../store/favoriteStore";
 
 export const Album = observer(() => {
   const { albumId } = useParams();
@@ -37,19 +39,33 @@ export const Album = observer(() => {
           alt={album.title}
           className="w-40 h-40 object-cover rounded-lg shadow-md"
         />
-        <div>
-          <h2 className="text-3xl font-bold text-[var(--color-dark)]">
-            {album.title}
-          </h2>
-          <Link
-            to={`/profile/${album.artist.id}`}
-            className="text-xl text-[var(--color-muted)] w-full hover:text-[var(--color-primary)] transition"
-          >
-            {album.artist.username}
-          </Link>
-          <p className="text-sm text-[var(--color-muted)] mt-2">
-            {formatDate(album.releaseDate)}
-          </p>
+        <div className="flex justify-between w-full items-center flex-wrap gap-2">
+          <div>
+            <h2 className="md:text-3xl text-lg font-bold text-dark">
+              {album.title}
+            </h2>
+            <Link
+              to={`/profile/${album.artist.id}`}
+              className="md:text-xl text-muted w-full hover:text-[var(--color-primary)] transition"
+            >
+              {album.artist.username}
+            </Link>
+            <p className="text-sm text-muted mt-2">
+              {formatDate(album.releaseDate)}
+            </p>
+          </div>
+          <div>
+            <button
+              className={`p-2 rounded-full transition cursor-pointer ${
+                album.favorite
+                  ? "bg-red-100 text-red-500 hover:text-red-400 hover:bg-red-50"
+                  : "text-gray-400 hover:text-red-400 hover:bg-red-50"
+              }`}
+              onClick={() => favoriteStore.toggleAlbum(album)}
+            >
+              <FaHeart />
+            </button>
+          </div>
         </div>
       </div>
       <div>
