@@ -19,6 +19,7 @@ import { AddAlbum } from "./components/Pages/AddAlbum";
 import { Favorite } from "./components/Pages/Favorite";
 import { Chat } from "./components/Pages/Chat";
 import { EditProfile } from "./components/Pages/EditProfile";
+import { NotFound } from "./components/Pages/NotFound";
 
 function App() {
   return (
@@ -85,11 +86,47 @@ function App() {
             }
           />
           <Route path="/album/:albumId" element={<Album />} />
-          <Route path="/songs/add" element={<AddSong />} />
-          <Route path="/albums/add" element={<AddAlbum />} />
-          <Route path="/favorites" element={<Favorite />} />
-          <Route path="/chats" element={<Chat />} />
-          <Route path="/profile/edit" element={<EditProfile />} />
+          <Route
+            path="/songs/add"
+            element={
+              <ProtectedRoute>
+                <AddSong />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/albums/add"
+            element={
+              <ProtectedRoute>
+                <AddAlbum />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/favorites"
+            element={
+              <ProtectedRoute>
+                <Favorite />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/chats"
+            element={
+              <ProtectedRoute>
+                <Chat />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile/edit"
+            element={
+              <ProtectedRoute>
+                <EditProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

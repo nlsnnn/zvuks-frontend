@@ -9,7 +9,7 @@ export const SongList = observer(() => {
   }, []);
 
   if (!songStore.songs.length) {
-    return <div className="text-center text-[var(--color-muted)]">Песен пока нет</div>;
+    return <div className="pl-2 text-[var(--color-muted)]">Песен пока нет</div>;
   }
 
   return (
