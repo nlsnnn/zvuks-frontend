@@ -22,7 +22,7 @@ class ChatStore {
   async sendMessage(recipientId, content) {
     try {
       const data = {
-        recipient_id: recipientId,
+        recipient: recipientId,
         content: content,
       };
       await ChatService.sendMessage(data);

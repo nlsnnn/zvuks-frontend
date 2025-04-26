@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { chatStore } from "../../../store/chatStore";
 import { userStore } from "../../../store/userStore";
+import { FaTrash, FaPen } from "react-icons/fa";
+import { observer } from "mobx-react-lite";
 
-export const Message = ({ msg }) => {
-  const isMine = msg.sender_id === userStore.user.id;
+export const Message = observer(({ msg }) => {
+  const isMine = msg.sender === userStore.user.id;
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(msg.content);
 
@@ -23,20 +25,24 @@ export const Message = ({ msg }) => {
   };
 
   return (
-    <div className={`w-full gap-2 flex ${isMine ? "justify-end" : "justify-start"} `}>
+    <div
+      className={`w-full gap-2 flex ${
+        isMine ? "justify-end" : "justify-start"
+      } `}
+    >
       {isMine && (
-        <div className="flex items-center gap-2 p-2 bg-gray-100 rounded-md text-xs text-white/70 ">
+        <div className="flex items-center gap-2 p-2 bg-gray-100 rounded-md text-xs text-gray-400 ">
           <button
             onClick={() => setIsEditing(true)}
-            className="cursor-pointer hover:underline h-max"
+            className="cursor-pointer hover:underline h-max hover:text-gray-600 transition"
           >
-            ✏️
+            <FaPen />
           </button>
           <button
             onClick={handleDelete}
-            className="hover:cursor-pointer hover:underline h-max"
+            className="hover:cursor-pointer hover:underline h-max hover:text-gray-600 transition"
           >
-            🗑️
+            <FaTrash />
           </button>
         </div>
       )}
@@ -76,11 +82,14 @@ export const Message = ({ msg }) => {
               <div className="text-sm whitespace-pre-wrap break-words">
                 {msg.content}
               </div>
-              <div className="text-xs text-right text-gray-400">
-                {new Date(msg.created_at).toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+              <div className="flex justify-between text-xs text-gray-400 gap-2">
+                {msg.updated && <span>изменено</span>}
+                <div className="a text-right ">
+                  {new Date(msg.created).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </div>
               </div>
             </div>
           </>
@@ -88,4 +97,4 @@ export const Message = ({ msg }) => {
       </div>
     </div>
   );
-};
+});

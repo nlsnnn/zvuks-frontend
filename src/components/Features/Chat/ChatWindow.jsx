@@ -21,7 +21,16 @@ export const ChatWindow = observer(({ activeChat, setActiveChat }) => {
 
       ws.onmessage = (event) => {
         const msg = JSON.parse(event.data);
-        chatStore.messages = [...chatStore.messages, msg];
+        const type = msg.type;
+        if (type == "message") {
+          chatStore.messages = [...chatStore.messages, msg];
+        } else if (type == "update") {
+          const oldMsg = chatStore.messages.find((v) => v.id === msg.id);
+          oldMsg.content = msg.content;
+          oldMsg.updated = true;
+        } else if (type == "delete") {
+          chatStore.messages = chatStore.messages.filter((v) => v.id != msg.id);
+        }
       };
 
       return () => ws.close();
