@@ -20,7 +20,7 @@ export const sidebarRoutes = [
   {
     href: "/favorites",
     icon: FaHeart,
-    title: "Моя музыка",
+    title: "Любимое",
   },
   {
     href: "/friends",

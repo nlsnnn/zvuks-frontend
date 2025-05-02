@@ -4,6 +4,8 @@ import { SongService } from "../service/songService";
 
 class SongStore {
   songs = [];
+  popularSongs = [];
+  newSongs = [];
   currentSongIndex = -1;
   currentHowl = null;
   volume = 1;
@@ -82,6 +84,8 @@ class SongStore {
     this.currentHowl.on("play", () => {
       this.updateTime();
     });
+
+    this.listen(song.id);
   }
 
   playSingleSong(song) {
@@ -141,6 +145,20 @@ class SongStore {
       console.log(e);
       return false;
     }
+  }
+
+  async listen(songId) {
+    SongService.listen(songId);
+  }
+
+  async getPopulars() {
+    const response = await SongService.getPopulars();
+    this.popularSongs = response.data;
+  }
+
+  async getNews() {
+    const response = await SongService.getNews();
+    this.newSongs = response.data;
   }
 }
 

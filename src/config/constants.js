@@ -33,3 +33,9 @@ export const albumSongs = (albumId) => `/music/album/${albumId}/songs`;
 // Favorite
 export const favoriteSong = "/music/favorite/song";
 export const favoriteAlbum = "/music/favorite/album";
+
+// Recommendations
+const recommendations = "/music/recommendations";
+export const popularSongs = recommendations + "/popular/songs";
+export const listenSong = recommendations + "/listen/";
+export const newSongs = recommendations + "/new/songs";
