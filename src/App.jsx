@@ -126,6 +126,39 @@ function App() {
               </ProtectedRoute>
             }
           />
+          {/* <Route
+            path="/playlists"
+            element={
+              <ProtectedRoute>
+                <Playlists />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/playlists/add"
+            element={
+              <ProtectedRoute>
+                <AddPlaylist />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/playlists/:playlistId"
+            element={
+              <ProtectedRoute>
+                <PlaylistDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/playlists/:playlistId/edit"
+            element={
+              <ProtectedRoute>
+                <EditPlaylist />
+              </ProtectedRoute>
+            }
+          /> */}
+
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

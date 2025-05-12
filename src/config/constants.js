@@ -7,9 +7,9 @@ export const logout = "/auth/logout/";
 export const me = "/auth/me/";
 export const search = "/auth/user/search/";
 export const profile = (userId) => `/auth/user/profile/${userId}`;
-export const updateProfile = "auth/user/update"
-export const passwordResetRequest = "/auth/password-reset"
-export const passwordResetConfirm = "/auth/password-reset/confirm"
+export const updateProfile = "auth/user/update";
+export const passwordResetRequest = "/auth/password-reset";
+export const passwordResetConfirm = "/auth/password-reset/confirm";
 
 // Friends
 export const friends = "/friends";
@@ -39,3 +39,8 @@ const recommendations = "/music/recommendations";
 export const popularSongs = recommendations + "/popular/songs";
 export const listenSong = recommendations + "/listen/";
 export const newSongs = recommendations + "/new/songs";
+
+// Playlist
+export const playlist = "/music/playlist";
+export const playlistSong = "/music/playlist/song/";
+export const playlistUser = "/music/playlist/user/";
