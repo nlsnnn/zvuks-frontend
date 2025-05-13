@@ -6,8 +6,8 @@ export class ArtistService {
     return await apiClient.get(artistSongs);
   }
 
-  static async getSongInfo(id) {
-    return await apiClient.get(artistSongs + `/${id}`);
+  static async getSongInfo(id, days = 90) {
+    return await apiClient.get(artistSongs + `/${id}?days=${days}`);
   }
 
   static async getMyAlbums() {
