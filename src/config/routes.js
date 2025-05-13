@@ -4,6 +4,7 @@ import {
   FaComment,
   FaMusic,
   FaHeart,
+  FaGear
 } from "react-icons/fa6";
 
 export const sidebarRoutes = [
@@ -31,5 +32,10 @@ export const sidebarRoutes = [
     href: "/chats",
     icon: FaComment,
     title: "Чаты",
+  },
+  {
+    href: "/artist",
+    icon: FaGear,
+    title: "Артист",
   },
 ];

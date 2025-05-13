@@ -44,3 +44,8 @@ export const newSongs = recommendations + "/new/songs";
 export const playlist = "/music/playlist";
 export const playlistSong = "/music/playlist/song/";
 export const playlistUser = "/music/playlist/user/";
+
+// Artist
+const artist = "/music/artist/me"
+export const artistSongs = artist + "/songs"
+export const artistAlbums = artist + "/albums"

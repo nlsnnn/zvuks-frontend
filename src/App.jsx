@@ -20,6 +20,8 @@ import { Favorite } from "./components/Pages/Favorite";
 import { Chat } from "./components/Pages/Chat";
 import { EditProfile } from "./components/Pages/EditProfile";
 import { NotFound } from "./components/Pages/NotFound";
+import { ArtistDashboard } from "./components/Pages/ArtistDashboard";
+import { ArtistSongStats } from "./components/Pages/ArtistSongStats";
 
 function App() {
   return (
@@ -126,6 +128,23 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/artist"
+            element={
+              <ProtectedRoute>
+                <ArtistDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/artist/songs/:id"
+            element={
+              <ProtectedRoute>
+                <ArtistSongStats />
+              </ProtectedRoute>
+            }
+          />
+
           {/* <Route
             path="/playlists"
             element={
