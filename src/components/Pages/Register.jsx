@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { userStore } from "../../store/userStore";
 import { Input } from "../UI/Input";
+import { TermsModal } from "../Features/TermsModal";
 
 const schema = z
   .object({
@@ -24,6 +25,8 @@ const schema = z
   });
 
 export const Register = () => {
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -40,6 +43,11 @@ export const Register = () => {
   }, []);
 
   const onSubmit = async (data) => {
+    if (!termsAccepted) {
+      setShowModal(true);
+      return;
+    }
+
     try {
       await userStore.register(data.email, data.username, data.password);
       navigate("/login");
@@ -50,76 +58,99 @@ export const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-center mb-6">Регистрация</h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div>
-            <label className="form-label">Email</label>
-            <Input
-              type="email"
-              {...register("email")}
-              placeholder="Введите email"
-              className="bg-gray-100 text-sm"
-            />
-            {errors.email && (
-              <p className="form-error">{errors.email.message}</p>
+    <>
+      {showModal && (
+        <TermsModal
+          onClose={() => setShowModal(false)}
+          onAccept={() => setTermsAccepted(true)}
+        />
+      )}
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold text-center mb-6">Регистрация</h2>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div>
+              <label className="form-label">Email</label>
+              <Input
+                type="email"
+                {...register("email")}
+                placeholder="Введите email"
+                className="bg-gray-100 text-sm"
+              />
+              {errors.email && (
+                <p className="form-error">{errors.email.message}</p>
+              )}
+            </div>
+            <div>
+              <label className="form-label">Имя пользователя</label>
+              <Input
+                type="text"
+                {...register("username")}
+                placeholder="Введите имя пользователя"
+                className="bg-gray-100 text-sm"
+              />
+              {errors.username && (
+                <p className="form-error">{errors.username.message}</p>
+              )}
+            </div>
+            <div>
+              <label className="form-label">Пароль</label>
+              <Input
+                type="password"
+                {...register("password")}
+                placeholder="Введите пароль"
+                className="bg-gray-100 text-sm"
+              />
+              {errors.password && (
+                <p className="form-error">{errors.password.message}</p>
+              )}
+            </div>
+            <div>
+              <label className="form-label">Подтвердите пароль</label>
+              <Input
+                type="password"
+                {...register("confirmPassword")}
+                placeholder="Подтвердите пароль"
+                className="bg-gray-100 text-sm"
+              />
+              {errors.confirmPassword && (
+                <p className="form-error">{errors.confirmPassword.message}</p>
+              )}
+            </div>
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={termsAccepted}
+                onChange={() => setShowModal(true)}
+                disabled={!termsAccepted}
+              />
+              <button
+                type="button"
+                onClick={() => setShowModal(true)}
+                className="text-sm hover:text-blue-600 hover:underline cursor-pointer"
+              >
+                Я принимаю пользовательское соглашение
+              </button>
+            </div>
+            {errors.other && (
+              <p className="form-error text-center">{errors.other.message}</p>
             )}
-          </div>
-          <div>
-            <label className="form-label">Имя пользователя</label>
-            <Input
-              type="text"
-              {...register("username")}
-              placeholder="Введите имя пользователя"
-              className="bg-gray-100 text-sm"
-            />
-            {errors.username && (
-              <p className="form-error">{errors.username.message}</p>
-            )}
-          </div>
-          <div>
-            <label className="form-label">Пароль</label>
-            <Input
-              type="password"
-              {...register("password")}
-              placeholder="Введите пароль"
-              className="bg-gray-100 text-sm"
-            />
-            {errors.password && (
-              <p className="form-error">{errors.password.message}</p>
-            )}
-          </div>
-          <div>
-            <label className="form-label">Подтвердите пароль</label>
-            <Input
-              type="password"
-              {...register("confirmPassword")}
-              placeholder="Подтвердите пароль"
-              className="bg-gray-100 text-sm"
-            />
-            {errors.confirmPassword && (
-              <p className="form-error">{errors.confirmPassword.message}</p>
-            )}
-          </div>
-          {errors.other && (
-            <p className="form-error text-center">{errors.other.message}</p>
-          )}
 
-          <button
-            type="submit"
-            className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
-          >
-            Зарегистрироваться
-          </button>
-        </form>
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Уже есть аккаунт?{" "}
-          <Link to="/login" className="text-blue-600 hover:underline">
-            Войти
-          </Link>
-        </p>
+            <button
+              type="submit"
+              className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+            >
+              Зарегистрироваться
+            </button>
+          </form>
+          <p className="mt-4 text-center text-sm text-gray-600">
+            Уже есть аккаунт?{" "}
+            <Link to="/login" className="text-blue-600 hover:underline">
+              Войти
+            </Link>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };

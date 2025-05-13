@@ -30,10 +30,15 @@ export class UserService {
       const response = await apiClient.post(register, data);
       return response.data;
     } catch (e) {
+      console.log(e);
       if (e.response && e.response.data.detail) {
-        throw new Error(
-          e.response.data.detail.map((err) => err.msg).join(", ")
-        );
+        if (e.response.data.detail === Array) {
+          throw new Error(
+            e.response.data.detail.map((err) => err.msg).join(", ")
+          );
+        } else {
+          throw new Error(e.response.data.detail);
+        }
       } else {
         throw new Error("Ошибка при регистрации");
       }
