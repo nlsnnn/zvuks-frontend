@@ -43,7 +43,7 @@ export const ArtistDashboard = observer(() => {
             {artistStore.myAlbums.map((album) => (
               <div key={album.id} className="glass-card p-4">
                 <h3 className="text-lg font-semibold">{album.title}</h3>
-                <p className="text-muted">{album.songs.length} треков</p>
+                {/* <p className="text-muted">{album.songs.length} треков</p> */}
                 <Link
                   to={`/artist/albums/${album.id}`}
                   className="text-primary text-sm hover:underline"

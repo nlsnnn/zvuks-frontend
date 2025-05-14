@@ -14,8 +14,8 @@ export class ArtistService {
     return await apiClient.get(artistAlbums);
   }
 
-  static async getAlbumInfo(id) {
-    return await apiClient.get(artistAlbums + `/${id}`);
+  static async getAlbumInfo(id, days = 90) {
+    return await apiClient.get(artistAlbums + `/${id}?days=${days}`);
   }
 
   static async getDashboard() {

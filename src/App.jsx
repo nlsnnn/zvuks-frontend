@@ -22,6 +22,7 @@ import { EditProfile } from "./components/Pages/EditProfile";
 import { NotFound } from "./components/Pages/NotFound";
 import { ArtistDashboard } from "./components/Pages/ArtistDashboard";
 import { ArtistSongStats } from "./components/Pages/ArtistSongStats";
+import { ArtistAlbumStats } from "./components/Pages/ArtistAlbumStats";
 
 function App() {
   return (
@@ -141,6 +142,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ArtistSongStats />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/artist/albums/:id"
+            element={
+              <ProtectedRoute>
+                <ArtistAlbumStats />
               </ProtectedRoute>
             }
           />
