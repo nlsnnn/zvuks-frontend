@@ -19,6 +19,6 @@ export class ArtistService {
   }
 
   static async getDashboard() {
-    return await apiClient.get("/artist/me");
+    return await apiClient.get("/music/artist/me/");
   }
 }
