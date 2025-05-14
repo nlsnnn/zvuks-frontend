@@ -12,6 +12,16 @@ export class SongService {
     }
   }
 
+  static async getSong(id) {
+    try {
+      const response = await apiClient.get(songs + `${id}/`);
+      return response;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  }
+
   static async addSong(data) {
     try {
       const response = await apiClient.post(songs, data);

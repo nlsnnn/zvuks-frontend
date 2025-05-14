@@ -24,6 +24,7 @@ import { ArtistDashboard } from "./components/Pages/ArtistDashboard";
 import { ArtistSongStats } from "./components/Pages/ArtistSongStats";
 import { ArtistAlbumStats } from "./components/Pages/ArtistAlbumStats";
 import { ArtistManageMusic } from "./components/Pages/ArtistManageMusic";
+import { EditSong } from "./components/Pages/EditSong";
 
 function App() {
   return (
@@ -159,6 +160,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <ArtistManageMusic />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/songs/edit/:id"
+            element={
+              <ProtectedRoute>
+                <EditSong />
               </ProtectedRoute>
             }
           />

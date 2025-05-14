@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { artistStore } from "../../store/artistStore";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const ArtistManageMusic = observer(() => {
   const [songSearch, setSongSearch] = useState("");
@@ -48,6 +49,8 @@ export const ArtistManageMusic = observer(() => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredSongs.map((song) => {
             const isArchived = song.archive;
+            const releaseDate = new Date(song.releaseDate);
+            const isFuture = releaseDate > new Date();
 
             return (
               <div key={song.id} className="glass-card p-4 space-y-2">
@@ -58,13 +61,20 @@ export const ArtistManageMusic = observer(() => {
                 <p className="text-muted">
                   {song.artists.map((a) => a.username).join(", ")}
                 </p>
+                {isFuture && (
+                  <p className="text-sm text-yellow-500 font-medium">
+                    Ожидает релиза ({releaseDate.toLocaleDateString("ru-RU")})
+                  </p>
+                )}
+
                 <div className="flex gap-3">
                   <Link
-                    to={`/artist/songs/${song.id}`}
-                    className="text-sm text-primary hover:underline"
+                    to={`/songs/edit/${song.id}`}
+                    className="text-sm text-blue-500 hover:underline cursor-pointer"
                   >
-                    Статистика
+                    Редактировать
                   </Link>
+
                   {isArchived ? (
                     <button
                       className="text-sm text-green-500 hover:underline cursor-pointer"
@@ -114,8 +124,8 @@ export const ArtistManageMusic = observer(() => {
                   Статистика
                 </Link>
                 <button
-                  className="text-sm text-red-500 hover:underline"
-                  onClick={() => alert("TODO: редактирование альбома")}
+                  className="text-sm text-red-500 hover:underline cursor-pointer"
+                  onClick={() => toast.error("Эта функция еще не реализована")}
                 >
                   Редактировать
                 </button>

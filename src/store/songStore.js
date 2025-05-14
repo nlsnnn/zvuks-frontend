@@ -130,6 +130,16 @@ class SongStore {
     }
   }
 
+  async getSong(id) {
+    try {
+      const response = await SongService.getSong(id);
+      return response.data;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  }
+
   async addSong(name, date, artists, cover, song) {
     try {
       const form = new FormData();
@@ -140,6 +150,16 @@ class SongStore {
       form.append("cover", cover);
 
       const response = await SongService.addSong(form);
+      return response;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  }
+
+  async updateSong(id, data) {
+    try {
+      const response = await SongService.updateSong(id, data);
       return response;
     } catch (e) {
       console.log(e);
