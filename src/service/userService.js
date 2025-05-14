@@ -10,6 +10,7 @@ import {
   passwordResetRequest,
   passwordResetConfirm,
 } from "../config/constants";
+import { handleApiError } from "../utils";
 
 export class UserService {
   static async login(data) {
@@ -17,11 +18,7 @@ export class UserService {
       const response = await apiClient.post(login, data);
       return response.data;
     } catch (e) {
-      if (e.response && e.response.data.detail) {
-        throw new Error(e.response.data.detail);
-      } else {
-        throw new Error("Ошибка при входе");
-      }
+      handleApiError(e, "вход");
     }
   }
 
@@ -30,18 +27,7 @@ export class UserService {
       const response = await apiClient.post(register, data);
       return response.data;
     } catch (e) {
-      console.log(e);
-      if (e.response && e.response.data.detail) {
-        if (e.response.data.detail === Array) {
-          throw new Error(
-            e.response.data.detail.map((err) => err.msg).join(", ")
-          );
-        } else {
-          throw new Error(e.response.data.detail);
-        }
-      } else {
-        throw new Error("Ошибка при регистрации");
-      }
+      handleApiError(e, "регистрация");
     }
   }
 
@@ -49,13 +35,7 @@ export class UserService {
     try {
       const response = await apiClient.post(logout);
     } catch (e) {
-      if (e.response && e.response.data.detail) {
-        throw new Error(
-          e.response.data.detail.map((err) => err.msg).join(", ")
-        );
-      } else {
-        throw new Error("Ошибка при выходе");
-      }
+      handleApiError(e, "выход");
     }
   }
 
@@ -64,11 +44,7 @@ export class UserService {
       const response = await apiClient.post(passwordResetRequest, data);
       return response.data;
     } catch (e) {
-      if (e.response && e.response.data.detail) {
-        throw new Error(e.response.data.detail);
-      } else {
-        throw new Error("Ошибка при восстановлении пароля");
-      }
+      handleApiError(e, "запрос восстановления пароля");
     }
   }
 
@@ -77,23 +53,15 @@ export class UserService {
       const response = await apiClient.post(passwordResetConfirm, data);
       return response.data;
     } catch (e) {
-      if (e.response && e.response.data.detail) {
-        throw new Error(
-          e.response.data.detail.map((err) => err.msg).join(", ")
-        );
-      } else {
-        throw new Error("Ошибка при восстановлении пароля");
-      }
+      handleApiError(e, "подтверждение восстановления пароля");
     }
   }
 
   static async getMe() {
     try {
       const response = await apiClient.get(me);
-      console.log(response);
       return response;
     } catch (e) {
-      console.log(e);
       return false;
     }
   }
@@ -104,7 +72,7 @@ export class UserService {
       console.log(response);
       return response;
     } catch (e) {
-      console.log(e);
+      handleApiError(e, "поиск пользователей");
     }
   }
 
@@ -113,7 +81,7 @@ export class UserService {
       const response = await apiClient.get(profile(userId));
       return response;
     } catch (e) {
-      console.log(e);
+      handleApiError(e, "получение профиля");
     }
   }
 
@@ -122,7 +90,7 @@ export class UserService {
       const response = await apiClient.post(updateProfile, data);
       return response;
     } catch (e) {
-      console.log(e);
+      handleApiError(e, "обновление профиля");
     }
   }
 }
