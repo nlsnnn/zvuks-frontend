@@ -39,6 +39,7 @@ const recommendations = "/music/recommendations";
 export const popularSongs = recommendations + "/popular/songs";
 export const listenSong = recommendations + "/listen/";
 export const newSongs = recommendations + "/new/songs";
+export const mostLikedSongs = recommendations + "/most-liked/songs";
 
 // Playlist
 export const playlist = "/music/playlist";

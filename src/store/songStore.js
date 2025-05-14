@@ -6,6 +6,7 @@ class SongStore {
   songs = [];
   popularSongs = [];
   newSongs = [];
+  mostLikedSongs = [];
   currentSongIndex = -1;
   currentHowl = null;
   volume = 1;
@@ -179,6 +180,11 @@ class SongStore {
   async getNews() {
     const response = await SongService.getNews();
     this.newSongs = response.data;
+  }
+
+  async getMostLiked() {
+    const response = await SongService.getMostLiked();
+    this.mostLikedSongs = response.data;
   }
 }
 

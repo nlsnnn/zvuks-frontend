@@ -1,5 +1,11 @@
 import { apiClient } from "../api/apiClient";
-import { listenSong, newSongs, popularSongs, songs } from "../config/constants";
+import {
+  listenSong,
+  mostLikedSongs,
+  newSongs,
+  popularSongs,
+  songs,
+} from "../config/constants";
 
 export class SongService {
   static async getSongs() {
@@ -66,6 +72,28 @@ export class SongService {
     try {
       const response = await apiClient.get(newSongs);
       return response;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  }
+
+  static async getMostLiked() {
+    try {
+      const response = await apiClient.get(mostLikedSongs);
+      return response;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  }
+
+  static async search(query) {
+    try {
+      const response = await apiClient.get(songs + "search", {
+        params: { query: query },
+      });
+      return response.data;
     } catch (e) {
       console.log(e);
       return false;
