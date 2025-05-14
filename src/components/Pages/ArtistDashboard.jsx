@@ -24,7 +24,12 @@ export const ArtistDashboard = observer(() => {
 
   return (
     <div className="p-6 space-y-8">
-      <h1 className="text-2xl font-bold text-dark">Панель артиста</h1>
+      <div className="flex flex-wrap gap-4 justify-between items-center">
+        <h1 className="text-2xl font-bold text-dark">Панель артиста</h1>
+        <Link to="/artist/manage" className="btn-primary">
+          Управление музыкой
+        </Link>
+      </div>
 
       {artistStore.dashboard && (
         <ArtistDashboardBanner dashboard={artistStore.dashboard} />
@@ -44,7 +49,10 @@ export const ArtistDashboard = observer(() => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredSongs.map((song) => (
             <div key={song.id} className="glass-card p-4">
-              <h3 className="text-lg font-semibold">{song.title}</h3>
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold">{song.title}</h3>
+                {song.archive && <h3 className="text-lg text-muted">СКРЫТО</h3>}
+              </div>
               <p className="text-muted">
                 {song.artists.map((a) => a.username).join(", ")}
               </p>

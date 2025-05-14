@@ -23,6 +23,7 @@ import { NotFound } from "./components/Pages/NotFound";
 import { ArtistDashboard } from "./components/Pages/ArtistDashboard";
 import { ArtistSongStats } from "./components/Pages/ArtistSongStats";
 import { ArtistAlbumStats } from "./components/Pages/ArtistAlbumStats";
+import { ArtistManageMusic } from "./components/Pages/ArtistManageMusic";
 
 function App() {
   return (
@@ -150,6 +151,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ArtistAlbumStats />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/artist/manage"
+            element={
+              <ProtectedRoute>
+                <ArtistManageMusic />
               </ProtectedRoute>
             }
           />

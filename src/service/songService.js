@@ -22,6 +22,16 @@ export class SongService {
     }
   }
 
+  static async updateSong(id, data) {
+    try {
+      const response = await apiClient.patch(songs + `${id}/`, data);
+      return response;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  }
+
   static async listen(songId) {
     try {
       const response = await apiClient.get(listenSong + songId);
