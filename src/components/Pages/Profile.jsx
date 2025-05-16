@@ -2,6 +2,9 @@ import { observer } from "mobx-react-lite";
 import { Link, useParams } from "react-router-dom";
 import { userStore } from "../../store/userStore";
 import { useEffect } from "react";
+import { adminStore } from "../../store/adminStore";
+import { toast } from "react-toastify";
+import { adminCheckProfile } from "../../utils";
 
 export const Profile = observer(() => {
   const { userId } = useParams();
@@ -19,9 +22,24 @@ export const Profile = observer(() => {
   if (userStore.error)
     return <div className="text-red-500 text-center">{userStore.error}</div>;
 
+  const handleBlock = async () => {
+    const res = await adminStore.blockUser(userId);
+    if (res) {
+      user.blocked = true;
+      toast.success(`Пользователь ${user.username} заблокирован`);
+    }
+  };
+
+  const handleUnblock = async () => {
+    const res = await adminStore.unblockUser(userId);
+    if (res) {
+      user.blocked = false;
+      toast.success(`Пользователь ${user.username} разблокирован`);
+    }
+  };
+
   return (
     <>
-      {/* <div className="glass-card p-8 w-full max-w-3xl mx-auto rounded-xl shadow-lg"> */}
       <div className="flex flex-col items-center">
         <img
           src={user.avatar}
@@ -41,6 +59,22 @@ export const Profile = observer(() => {
           >
             Редактировать профиль
           </Link>
+        )}
+        {!adminCheckProfile(user, userStore.user) && (
+          <button
+            className="btn-primary bg-red-500 hover:bg-red-600 cursor-pointer mt-4"
+            onClick={handleBlock}
+          >
+            Заблокировать пользователя
+          </button>
+        )}
+        {adminCheckProfile(user, userStore.user) && (
+          <button
+            className="btn-primary bg-green-500 hover:bg-green-600 cursor-pointer mt-4"
+            onClick={handleUnblock}
+          >
+            Разблокировать пользователя
+          </button>
         )}
       </div>
 
@@ -78,7 +112,6 @@ export const Profile = observer(() => {
           <p className="text-gray-500 text-center">Песни не добавлены</p>
         )}
       </div>
-      {/* </div> */}
     </>
   );
 });

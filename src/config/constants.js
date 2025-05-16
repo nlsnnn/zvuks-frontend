@@ -50,3 +50,7 @@ export const playlistUser = "/music/playlist/user/";
 const artist = "/music/artist/me"
 export const artistSongs = artist + "/songs"
 export const artistAlbums = artist + "/albums"
+
+// Admin
+export const blockUser = "/admin/block"
+export const unblockUser = "/admin/unblock"

@@ -7,6 +7,14 @@ export const formatDate = (date) => {
   return new Date(date).toISOString().slice(0, 10);
 };
 
+export const adminCheckProfile = (profileUser, currentUser) => {
+  return (
+    profileUser.blocked &&
+    currentUser.role === "admin" &&
+    currentUser.id != profileUser.id
+  );
+};
+
 export const handleApiError = (error, methodName) => {
   // console.error(`Ошибка в методе ${methodName}:`, {
   //   message: error.message,
