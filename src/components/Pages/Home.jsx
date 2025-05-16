@@ -86,7 +86,7 @@ export const Home = observer(() => {
             {songStore.popularSongs && (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {songStore.popularSongs.map((song) => (
-                  <SongCard key={song.id} song={song} />
+                  <SongCard key={song.id} song={song} type="popular" />
                 ))}
               </div>
             )}
@@ -112,7 +112,7 @@ export const Home = observer(() => {
             {songStore.newSongs && (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {songStore.newSongs.map((song) => (
-                  <SongCard key={song.id} song={song} />
+                  <SongCard key={song.id} song={song} type="new" />
                 ))}
               </div>
             )}
@@ -139,7 +139,7 @@ export const Home = observer(() => {
             {songStore.mostLikedSongs && (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {songStore.mostLikedSongs.map((song) => (
-                  <SongCard key={song.id} song={song} />
+                  <SongCard key={song.id} song={song} type="liked" />
                 ))}
               </div>
             )}

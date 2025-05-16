@@ -4,10 +4,27 @@ import { songStore } from "../../store/songStore";
 import { favoriteStore } from "../../store/favoriteStore";
 import { observer } from "mobx-react-lite";
 
-export const SongCard = observer(({ song, isPlaying }) => {
+export const SongCard = observer(({ song, isPlaying, type = "songs" }) => {
   const handleCardClick = (e) => {
     e.stopPropagation();
+    console.log("play");
+    if (type == "songs") {
+      console.log("1");
+    } else if (type == "new") {
+      console.log("2");
+      // songStore.playSong(songStore.newSongs.indexOf(song));
+      songStore.songs = songStore.newSongs
+    } else if (type == "popular") {
+      console.log("3");
+      // songStore.playSong(songStore.popularSongs.indexOf(song));
+      songStore.songs = songStore.popularSongs
+    } else if (type == "liked") {
+      console.log("4");
+      songStore.songs = songStore.mostLikedSongs
+      // songStore.playSong(songStore.mostLikedSongs.indexOf(song));
+    }
     songStore.playSong(songStore.songs.indexOf(song));
+
   };
 
   const onFavorite = (e) => {
