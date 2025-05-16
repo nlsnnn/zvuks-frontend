@@ -19,7 +19,7 @@ class UserStore {
         identifier: identifier,
         password: password,
       });
-      this.user = response;
+      return response
     } catch (e) {
       throw e;
     }

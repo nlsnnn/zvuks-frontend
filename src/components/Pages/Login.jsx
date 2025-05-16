@@ -35,9 +35,9 @@ export const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      await userStore.login(data.identifier, data.password);
-      if (userStore.user) {
-        userStore.checkAuth()
+      const res = await userStore.login(data.identifier, data.password);
+      if (res) {
+        userStore.checkAuth();
         navigate("/");
       }
       console.log(errors);

@@ -8,6 +8,8 @@ import { useDebounce } from "use-debounce";
 import { Input } from "../UI/Input";
 import { FaFire, FaHeart, FaMagnifyingGlass } from "react-icons/fa6";
 import { MdOutlineFiberNew } from "react-icons/md";
+import { userStore } from "../../store/userStore";
+import { Link } from "react-router-dom";
 
 export const Home = observer(() => {
   const [search, setSearch] = useState("");
@@ -81,11 +83,25 @@ export const Home = observer(() => {
               <FaFire className="text-red-500 text-2xl" />
               <h2 className="text-2xl font-semibold"> Популярное</h2>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {songStore.popularSongs.map((song) => (
-                <SongCard key={song.id} song={song} />
-              ))}
-            </div>
+            {songStore.popularSongs && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {songStore.popularSongs.map((song) => (
+                  <SongCard key={song.id} song={song} />
+                ))}
+              </div>
+            )}
+            {songStore.popularSongs.length === 0 && (
+              <h2 className="text-dark">
+                Ничего нет. Самое время{" "}
+                <Link
+                  to={userStore.user ? "/artist/manage" : "/login"}
+                  className="text-primary hover:text-blue-700 transition"
+                >
+                  добавить
+                </Link>{" "}
+                свою песню!
+              </h2>
+            )}
           </section>
 
           <section>
@@ -93,11 +109,26 @@ export const Home = observer(() => {
               <MdOutlineFiberNew className="text-red-500 text-3xl" />
               <h2 className="text-2xl font-semibold ">Новинки</h2>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {songStore.newSongs.map((song) => (
-                <SongCard key={song.id} song={song} />
-              ))}
-            </div>
+            {songStore.newSongs && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {songStore.newSongs.map((song) => (
+                  <SongCard key={song.id} song={song} />
+                ))}
+              </div>
+            )}
+
+            {songStore.newSongs.length === 0 && (
+              <h2 className="text-dark">
+                Ничего нет. Самое время{" "}
+                <Link
+                  to={userStore.user ? "/artist/manage" : "/login"}
+                  className="text-primary hover:text-blue-700 transition"
+                >
+                  добавить
+                </Link>{" "}
+                свою песню!
+              </h2>
+            )}
           </section>
 
           <section>
@@ -105,11 +136,26 @@ export const Home = observer(() => {
               <FaHeart className="text-red-500 text-2xl" />
               <h2 className="text-2xl font-semibold"> Часто лайкают</h2>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {songStore.mostLikedSongs.map((song) => (
-                <SongCard key={song.id} song={song} />
-              ))}
-            </div>
+            {songStore.mostLikedSongs && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {songStore.mostLikedSongs.map((song) => (
+                  <SongCard key={song.id} song={song} />
+                ))}
+              </div>
+            )}
+
+            {songStore.mostLikedSongs.length === 0 && (
+              <h2 className="text-dark">
+                Ничего нет. Самое время{" "}
+                <Link
+                  to={userStore.user ? "/artist/manage" : "/login"}
+                  className="text-primary hover:text-blue-700 transition"
+                >
+                  добавить
+                </Link>{" "}
+                свою песню!
+              </h2>
+            )}
           </section>
         </>
       )}

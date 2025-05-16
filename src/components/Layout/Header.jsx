@@ -27,12 +27,15 @@ export const Header = observer(() => {
       <div className="flex items-center gap-4 ml-auto">
         {userStore.user && (
           <>
-            <span className="font-medium text-[var(--color-dark)]">
+            <Link
+              to={`/profile/${userStore.user.id}`}
+              className="font-medium text-dark hover:text-blue-700"
+            >
               {userStore.user.username}
-            </span>
+            </Link>
             <button
               onClick={handleLogout}
-              className="text-red-500 hover:text-red-600 transition"
+              className="text-red-500 hover:text-red-600 transition cursor-pointer hover:underline"
             >
               Выйти
             </button>
