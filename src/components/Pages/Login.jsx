@@ -11,7 +11,6 @@ const schema = z.object({
   identifier: z
     .string()
     .min(3, "Идентификатор слишком короткий")
-    .max(20, "Имя пользователя слишком длинное")
     .transform((v) => v.toLocaleLowerCase().replace(/\s+/g, "_")),
   password: z.string().min(5, "Пароль должен быть не менее 5 символов"),
   other: z.string().optional(),

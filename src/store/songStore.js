@@ -13,6 +13,7 @@ class SongStore {
   currentTime = 0;
   duration = 0;
   isPlaying = false;
+  loading = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -141,7 +142,8 @@ class SongStore {
     }
   }
 
-  async addSong(name, date, artists, cover, song) {
+  async addSong(name, date, artists, cover, song, notifySubscribers) {
+    this.loading = true;
     try {
       const form = new FormData();
       form.append("name", name);
@@ -149,12 +151,15 @@ class SongStore {
       form.append("artistIds", artists);
       form.append("song", song);
       form.append("cover", cover);
+      form.append("notifySubscribers", notifySubscribers);
 
       const response = await SongService.addSong(form);
       return response;
     } catch (e) {
       console.log(e);
       return false;
+    } finally {
+      this.loading = false;
     }
   }
 

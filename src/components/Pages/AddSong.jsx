@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Artists } from "../Features/Add/Artists";
 import { songStore } from "../../store/songStore";
+import { toast } from "react-toastify";
 
 const schema = z.object({
   title: z.string().min(1, "Введите название"),
@@ -39,6 +40,7 @@ const schema = z.object({
     .refine((file) => file instanceof File && file.size < 10 * 1024 * 1024, {
       message: "Размер аудиофайла не должен превышать 10 МБ",
     }),
+  notifyUsers: z.boolean().optional(),
 });
 
 export const AddSong = observer(() => {
@@ -65,6 +67,13 @@ export const AddSong = observer(() => {
       return;
     }
 
+    if (songStore.loading) {
+      toast.loading("Загрузка...", {
+        autoClose: 2000,
+      });
+      return;
+    }
+
     const artists = selectedAuthors.map((a) => a.id).join(",");
     const date = new Date(data.releaseDate).toISOString().slice(0, 16);
 
@@ -73,7 +82,8 @@ export const AddSong = observer(() => {
       date,
       artists,
       data.cover,
-      data.audio
+      data.audio,
+      data.notifyUsers
     );
     if (success) {
       navigate("/");
@@ -155,8 +165,19 @@ export const AddSong = observer(() => {
           )}
         </div>
 
-        <button type="submit" className="btn-primary w-full">
-          Добавить песню
+        <div>
+          <label className="inline-flex items-center">
+            <input type="checkbox" {...register("notifyUsers")} />
+            <span className="ml-2">Уведомить пользователей</span>
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          className="btn-primary w-full"
+          disabled={songStore.loading}
+        >
+          {songStore.loading ? "Загрузка..." : "Добавить песню"}
         </button>
       </form>
     </div>
