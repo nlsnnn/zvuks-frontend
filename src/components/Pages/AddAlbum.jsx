@@ -43,6 +43,7 @@ export const AddAlbum = observer(() => {
       const title = data.title;
       const releaseDate = new Date(data.releaseDate).toISOString().slice(0, 16);
       const cover = data.cover;
+      const notifyUsers = data.notifyUsers;
 
       const response = await albumStore.addAlbum(
         title,
@@ -51,7 +52,8 @@ export const AddAlbum = observer(() => {
         songFiles,
         songNames,
         trackNumbers,
-        songArtistsMatrix
+        songArtistsMatrix,
+        notifyUsers
       );
 
       if (response) navigate("/");
@@ -135,7 +137,18 @@ export const AddAlbum = observer(() => {
             )}
           </div>
 
-          <button type="submit" className="btn-primary w-full">
+          <div>
+            <label className="inline-flex items-center">
+              <input type="checkbox" {...register("notifyUsers")} />
+              <span className="ml-2">Уведомить пользователей</span>
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            className="btn-primary w-full"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Загрузка..." : "Создать альбом"}
           </button>
         </form>

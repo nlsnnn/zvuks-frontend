@@ -51,7 +51,8 @@ class AlbumStore {
     songFiles,
     songNames,
     trackNumbers,
-    songArtistsIds
+    songArtistsIds,
+    notifyUsers
   ) {
     try {
       const formData = new FormData();
@@ -66,6 +67,7 @@ class AlbumStore {
         formData.append("trackNumbers", num.toString())
       );
       formData.append("songArtistsIds", JSON.stringify(songArtistsIds));
+      formData.append("notifySubscribers", notifyUsers)
 
       console.log(songArtistsIds);
 

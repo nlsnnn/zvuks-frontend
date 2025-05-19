@@ -36,4 +36,5 @@ export const schema = z.object({
     message: "Обложка должна быть < 5 МБ",
   }),
   songs: z.array(songSchema).max(50, "Максимум 50 песен"),
+  notifyUsers: z.boolean().optional(),
 });
