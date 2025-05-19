@@ -1,14 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
 import { sidebarRoutes } from "../../config/routes";
+import { FaHeart } from "react-icons/fa6";
 
 export const Sidebar = () => {
   const { pathname } = useLocation();
 
   return (
-    <aside className="w-56 p-6 glass-card hidden md:flex flex-col gap-4">
+    <aside className="w-56 p-6 glass-card hidden md:flex flex-col gap-4 justify-between">
       <nav className="flex flex-col gap-2 text-[var(--color-dark)]">
         {sidebarRoutes.map((route, i) => {
-          const isActive = pathname.split('/')[1] === route.href.split('/')[1];
+          const isActive = pathname.split("/")[1] === route.href.split("/")[1];
           return (
             <Link
               key={i}
@@ -32,6 +33,18 @@ export const Sidebar = () => {
           );
         })}
       </nav>
+      <div className="flex flex-col gap-2">
+        <p className="text-xs text-muted">
+          Email поддержки:{" "}
+          <a
+            href="mailto:support@zvuks.com"
+            className="text-muted hover:underline hover:text-blue-600"
+          >
+            support@zvuks.com
+          </a>
+        </p>
+        <p className="text-xs text-muted">© 2025 Zvuks. Все права защищены.</p>
+      </div>
     </aside>
   );
 };

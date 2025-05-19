@@ -168,7 +168,7 @@ export const AddSong = observer(() => {
         <div>
           <label className="inline-flex items-center">
             <input type="checkbox" {...register("notifyUsers")} />
-            <span className="ml-2">Уведомить пользователей</span>
+            <span className="ml-2">Уведомить подписчиков</span>
           </label>
         </div>
 
