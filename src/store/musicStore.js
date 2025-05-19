@@ -11,8 +11,11 @@ class MusicStore {
 
   async searchAll(query) {
     const songs = await SongService.search(query);
-    this.searchResultsSongs = Array.isArray(songs) ? songs : [songs];
-    console.log(this.searchResultsSongs);
+    if (songs) {
+      this.searchResultsSongs = Array.isArray(songs) ? songs : [songs];
+    } else {
+      this.searchResultsSongs = [];
+    }
   }
 }
 

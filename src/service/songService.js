@@ -95,7 +95,6 @@ export class SongService {
       });
       return response.data;
     } catch (e) {
-      console.log(e);
       return false;
     }
   }

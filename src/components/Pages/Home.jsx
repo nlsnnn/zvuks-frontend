@@ -48,13 +48,15 @@ export const Home = observer(() => {
           <section>
             <div className="flex items-center gap-2 mb-4">
               <FaMagnifyingGlass className="text-gray-500 text-2xl" />
-              <h2 className="text-2xl font-semibold"> Найденные песни</h2>
+              <h2 className="text-2xl font-semibold">Найденные песни</h2>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {musicStore.searchResultsSongs?.map((song) => (
-                <SongCard key={song.id} song={song} />
-              ))}
-              {musicStore.searchResultsSongs?.length === 0 && (
+              {musicStore.searchResultsSongs.map((song) => {
+                console.log(musicStore.searchResultsSongs);
+
+                return <SongCard key={song.id} song={song} />;
+              })}
+              {musicStore.searchResultsSongs.length === 0 && (
                 <p className="text-dark col-span-full">Песен не найдено</p>
               )}
             </div>
@@ -90,7 +92,7 @@ export const Home = observer(() => {
                 ))}
               </div>
             )}
-            {songStore.popularSongs.length === 0 && (
+            {(!songStore.popularSongs || songStore.popularSongs?.length === 0) && (
               <h2 className="text-dark">
                 Ничего нет. Самое время{" "}
                 <Link
@@ -107,7 +109,7 @@ export const Home = observer(() => {
           <section>
             <div className="flex items-center gap-2 mb-4">
               <MdOutlineFiberNew className="text-red-500 text-3xl" />
-              <h2 className="text-2xl font-semibold ">Новинки</h2>
+              <h2 className="text-2xl font-semibold">Новинки</h2>
             </div>
             {songStore.newSongs && (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -117,7 +119,7 @@ export const Home = observer(() => {
               </div>
             )}
 
-            {songStore.newSongs.length === 0 && (
+            {(!songStore.newSongs || songStore.newSongs?.length === 0) && (
               <h2 className="text-dark">
                 Ничего нет. Самое время{" "}
                 <Link
@@ -144,7 +146,7 @@ export const Home = observer(() => {
               </div>
             )}
 
-            {songStore.mostLikedSongs.length === 0 && (
+            {(!songStore.mostLikedSongs || songStore.mostLikedSongs?.length === 0) && (
               <h2 className="text-dark">
                 Ничего нет. Самое время{" "}
                 <Link
