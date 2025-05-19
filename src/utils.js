@@ -8,6 +8,7 @@ export const formatDate = (date) => {
 };
 
 export const adminCheckProfile = (profileUser, currentUser) => {
+  console.log(currentUser.role);
   return (
     profileUser.blocked &&
     currentUser.role === "admin" &&

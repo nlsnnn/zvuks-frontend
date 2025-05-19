@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { UserService } from "../service/userService";
+import { toast } from "react-toastify";
 
 class UserStore {
   user = null;
@@ -19,7 +20,7 @@ class UserStore {
         identifier: identifier,
         password: password,
       });
-      return response
+      return response;
     } catch (e) {
       throw e;
     }
@@ -107,6 +108,26 @@ class UserStore {
       const response = await UserService.updateProfile(formData);
       return response;
     } catch (e) {
+      return false;
+    }
+  }
+
+  async subscribeUser(userId) {
+    try {
+      const response = await UserService.subscribe(userId);
+      return response;
+    } catch (e) {
+      toast.error(e.message);
+      return false;
+    }
+  }
+
+  async unsubscribeUser(userId) {
+    try {
+      const response = await UserService.unsubscribe(userId);
+      return response;
+    } catch (e) {
+      toast.error(e.message);
       return false;
     }
   }

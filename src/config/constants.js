@@ -10,6 +10,8 @@ export const profile = (userId) => `/auth/user/profile/${userId}`;
 export const updateProfile = "auth/user/update";
 export const passwordResetRequest = "/auth/password-reset";
 export const passwordResetConfirm = "/auth/password-reset/confirm";
+export const subscribeUser = "/auth/user/subscribe"
+export const unsubscribeUser = "/auth/user/unsubscribe"
 
 // Friends
 export const friends = "/friends";

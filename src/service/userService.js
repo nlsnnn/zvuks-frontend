@@ -9,6 +9,8 @@ import {
   updateProfile,
   passwordResetRequest,
   passwordResetConfirm,
+  subscribeUser,
+  unsubscribeUser,
 } from "../config/constants";
 import { handleApiError } from "../utils";
 
@@ -91,6 +93,24 @@ export class UserService {
       return response;
     } catch (e) {
       handleApiError(e, "обновление профиля");
+    }
+  }
+
+  static async subscribe(userId) {
+    try {
+      const response = await apiClient.post(subscribeUser + `/${userId}`)
+      return response
+    } catch (e) {
+      handleApiError(e, "подписка")
+    }
+  }
+
+  static async unsubscribe(userId) {
+    try {
+      const response = await apiClient.post(unsubscribeUser + `/${userId}`)
+      return response
+    } catch (e) {
+      handleApiError(e, "отписка")
     }
   }
 }

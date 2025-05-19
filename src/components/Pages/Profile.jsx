@@ -38,6 +38,22 @@ export const Profile = observer(() => {
     }
   };
 
+  const handleSubscribe = async () => {
+    const res = await userStore.subscribeUser(userId);
+    if (res) {
+      user.subscribed = true;
+      toast.success(`Вы подписались на ${user.username}`)
+    }
+  }
+
+  const handleUnsubscribe = async () => {
+    const res = await userStore.unsubscribeUser(userId);
+    if (res) {
+      user.subscribed = false;
+      toast.success(`Вы отписались от ${user.username}`)
+    }
+  }
+
   return (
     <>
       <div className="flex flex-col items-center">
@@ -52,30 +68,50 @@ export const Profile = observer(() => {
         <p className="text-gray-700 text-center mt-2">
           {user.bio || "Пользователь не добавил описание"}
         </p>
+        {!user.subscribed && user.id != userStore.user.id && (
+          <p
+            className="mt-4 text-primary hover:underline cursor-pointer"
+            onClick={handleSubscribe}
+          >
+            Подписаться
+          </p>
+        )}
+        {user.subscribed && user.id != userStore.user.id && (
+          <p
+            className="mt-4 text-primary hover:underline cursor-pointer"
+            onClick={handleUnsubscribe}
+          >
+            Отписаться
+          </p>
+        )}
         {userStore.user.id == userId && (
           <Link
             to="/profile/edit"
-            className="mt-4 text-[var(--color-primary)] hover:underline"
+            className="mt-4 text-primary hover:underline"
           >
             Редактировать профиль
           </Link>
         )}
-        {!adminCheckProfile(user, userStore.user) && (
-          <button
-            className="btn-primary bg-red-500 hover:bg-red-600 cursor-pointer mt-4"
-            onClick={handleBlock}
-          >
-            Заблокировать пользователя
-          </button>
-        )}
-        {adminCheckProfile(user, userStore.user) && (
-          <button
-            className="btn-primary bg-green-500 hover:bg-green-600 cursor-pointer mt-4"
-            onClick={handleUnblock}
-          >
-            Разблокировать пользователя
-          </button>
-        )}
+        {!user.blocked &&
+          userStore.user.role === "admin" &&
+          userStore.user.id != user.id && (
+            <button
+              className="btn-primary bg-red-500 hover:bg-red-600 cursor-pointer mt-4"
+              onClick={handleBlock}
+            >
+              Заблокировать пользователя
+            </button>
+          )}
+        {user.blocked &&
+          userStore.user.role === "admin" &&
+          userStore.user.id != user.id && (
+            <button
+              className="btn-primary bg-green-500 hover:bg-green-600 cursor-pointer mt-4"
+              onClick={handleUnblock}
+            >
+              Разблокировать пользователя
+            </button>
+          )}
       </div>
 
       <div className="mt-8">
