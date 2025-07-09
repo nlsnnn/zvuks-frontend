@@ -1,5 +1,5 @@
-export const baseURL = import.meta.env.VITE_API_HOST + ":" + import.meta.env.VITE_API_PORT;
-
+export const baseURL =
+  import.meta.env.VITE_API_HOST + ":" + import.meta.env.VITE_API_PORT;
 // Users
 export const login = "/auth/login/";
 export const register = "/auth/register/";
@@ -10,8 +10,8 @@ export const profile = (userId) => `/auth/user/profile/${userId}`;
 export const updateProfile = "auth/user/update";
 export const passwordResetRequest = "/auth/password-reset";
 export const passwordResetConfirm = "/auth/password-reset/confirm";
-export const subscribeUser = "/auth/user/subscribe"
-export const unsubscribeUser = "/auth/user/unsubscribe"
+export const subscribeUser = "/auth/user/subscribe";
+export const unsubscribeUser = "/auth/user/unsubscribe";
 
 // Friends
 export const friends = "/friends";
@@ -49,10 +49,10 @@ export const playlistSong = "/music/playlist/song/";
 export const playlistUser = "/music/playlist/user/";
 
 // Artist
-const artist = "/music/artist/me"
-export const artistSongs = artist + "/songs"
-export const artistAlbums = artist + "/albums"
+const artist = "/music/artist/me";
+export const artistSongs = artist + "/songs";
+export const artistAlbums = artist + "/albums";
 
 // Admin
-export const blockUser = "/admin/block"
-export const unblockUser = "/admin/unblock"
+export const blockUser = "/admin/block";
+export const unblockUser = "/admin/unblock";
