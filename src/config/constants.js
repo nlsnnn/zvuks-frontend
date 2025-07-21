@@ -1,5 +1,4 @@
-export const baseURL =
-  import.meta.env.VITE_API_HOST + ":" + import.meta.env.VITE_API_PORT;
+export const baseURL = import.meta.env.VITE_API_BASE;
 // Users
 export const login = "/auth/login/";
 export const register = "/auth/register/";
