@@ -153,7 +153,7 @@ export const AddSong = observer(() => {
           <label className="form-label">Аудиофайл</label>
           <input
             type="file"
-            accept="audio/*"
+            accept=".mp3,audio/mpeg,audio/*"
             onChange={(e) => setValue("audio", e.target.files[0])}
             className="w-full"
           />

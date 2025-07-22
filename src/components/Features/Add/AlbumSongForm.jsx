@@ -57,7 +57,7 @@ export const AlbumSongForm = ({ index, remove }) => {
         <label className="form-label">Аудиофайл</label>
         <input
           type="file"
-          accept="audio/*"
+          accept=".mp3,audio/mpeg,audio/*"
           onChange={(e) =>
             setValue(`songs.${index}.audio`, e.target.files[0], {
               shouldValidate: true,
