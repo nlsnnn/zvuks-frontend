@@ -14,7 +14,7 @@ export const subscribeUser = "/auth/user/subscribe";
 export const unsubscribeUser = "/auth/user/unsubscribe";
 
 // Friends
-export const friends = "/friends";
+export const friends = "/friends/";
 export const pending = "/friends/pending";
 export const sended = "/friends/sended";
 export const accept = "/friends/accept";
@@ -23,12 +23,12 @@ export const deleteFriend = "/friends/delete";
 
 // Chat
 export const messages = "/chat/messages/";
-export const websocketURL = "ws://127.0.0.1:8000/chat/ws/";
+export const websocketURL = "wss://" + baseURL.replace(/^https?:\/\//, '') + "/chat/ws/";
 
 // Song
 export const songs = "/music/song/";
 
-export const albums = "/music/album";
+export const albums = "/music/album/";
 export const album = (albumId) => `/music/album/${albumId}`;
 export const albumSongs = (albumId) => `/music/album/${albumId}/songs`;
 
