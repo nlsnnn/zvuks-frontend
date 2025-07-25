@@ -4,7 +4,7 @@ import { messages } from "../config/constants";
 export class ChatService {
   static async getMessages(id) {
     try {
-      const response = await apiClient.get(messages + id);
+      const response = await apiClient.get(messages + `/${id}`);
       return response;
     } catch (e) {
       console.log(e);

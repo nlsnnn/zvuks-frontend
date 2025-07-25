@@ -22,7 +22,7 @@ export const reject = "/friends/reject";
 export const deleteFriend = "/friends/delete";
 
 // Chat
-export const messages = "/chat/messages/";
+export const messages = "/chat/messages";
 export const websocketURL = "wss://" + baseURL.replace(/^https?:\/\//, '') + "/chat/ws/";
 
 // Song
