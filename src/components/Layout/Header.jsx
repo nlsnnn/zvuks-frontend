@@ -20,9 +20,12 @@ export const Header = observer(() => {
       <button className="md:hidden mr-4" onClick={() => setMenuOpen(!menuOpen)}>
         <FiMenu className="text-2xl text-[var(--color-primary)]" />
       </button>
-      <div className="hidden md:block text-xl font-bold mr-4 md:mr-8 text-[var(--color-primary)] select-none">
-        🎵 zvuks
-      </div>
+      <Link to={"/"}>
+        <div className="hidden md:flex items-center text-xl font-bold mr-4 md:mr-8  select-none">
+          <img src="/zvuks-icon-white.png" alt="🎵" className="w-12 h-12" />
+          <span>zvukz</span>
+        </div>
+      </Link>
       <SearchBar />
       <div className="flex items-center gap-4 ml-auto">
         {userStore.user && (
